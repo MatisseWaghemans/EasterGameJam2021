@@ -23,10 +23,6 @@ public class BallBehaviour : MonoBehaviour
 
 	private void CheckControllerInput()
 	{
-		if(Input.GetAxis("Horizontal"))
-		{
-
-		}
 	}
 
 	private void ShootBall()
