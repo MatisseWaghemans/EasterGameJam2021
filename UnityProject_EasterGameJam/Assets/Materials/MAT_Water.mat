@@ -41,8 +41,8 @@ Material:
     - _alpha: 0.5
     - _metalicness: 0
     - _noiseScale: 0.1
-    - _ripelDencity: 0.25
-    - _ripelSlimness: 3
+    - _ripelDencity: 0.5
+    - _ripelSlimness: 2.5
     - _ripelSpeed: 1
     - _smoothness: 0
     - _waveDencity: 0.25
