@@ -12,8 +12,14 @@ public class UIFunctions : MonoBehaviour
 		StartCoroutine(LoadScene(sceneName));
 	}
 
-	public void ExitGame()
+	public void OnClickExit(float delayTime)
 	{
+		StartCoroutine(ExitGame(delayTime));
+	}
+
+	public IEnumerator ExitGame(float delayTime)
+	{
+		yield return new WaitForSeconds(delayTime);
 		Application.Quit();
 	}
 
