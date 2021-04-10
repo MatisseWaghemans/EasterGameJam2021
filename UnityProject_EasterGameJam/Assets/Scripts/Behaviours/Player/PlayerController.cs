@@ -31,15 +31,21 @@ public class PlayerController : MonoBehaviour
 
 
     //This is called from the GameManager; when the game is being setup.
-    public void SetupPlayer(int newPlayerID)
+    public bool TrySetupPlayer(int newPlayerID)
     {
         playerID = newPlayerID;
 
         currentControlScheme = playerInput.currentControlScheme;
+		if (currentControlScheme != "Gamepad")
+		{
+            return false;
+		}
 
         playerMovementBehaviour.SetupBehaviour();
         playerAnimationBehaviour.SetupBehaviour();
         playerVisualsBehaviour.SetupBehaviour(playerID, playerInput);
+
+        return true;
     }
 
 
@@ -72,10 +78,6 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.TogglePauseState(this);
         }
     }
-
-
-
-
 
     //INPUT SYSTEM AUTOMATIC CALLBACKS --------------
 
