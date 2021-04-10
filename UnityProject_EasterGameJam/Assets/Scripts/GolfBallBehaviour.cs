@@ -9,11 +9,11 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	[SerializeField] private Transform _cameraPivot;
 
-	[SerializeField] private LineRenderer _lineRenderer;
+	private LineRenderer _lineRenderer;
 
 	[SerializeField] private float _aimSpeedDirection;
 
-	[SerializeField]
+
 	private CameraBehaviour _cameraBehaviour;
 
 	private Rigidbody _rb;
@@ -24,7 +24,7 @@ public class GolfBallBehaviour : MonoBehaviour
 		get { return _currentPlayerState; }
 		set
 		{
-			_cameraBehaviour.StateChanged = true;
+			//_cameraBehaviour.StateChanged = true;
 			_currentPlayerState = value;
 		}
 	}
@@ -41,17 +41,17 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	private Vector3 _aimDirection;
 
-	private bool _ableToShoot = false;
-
-	private bool _southButtonPressed = false;
-
 	private bool _spectateStateToggled = false;
+
+	public int CurrentLevelScore = 0;
 
 	private void Start()
 	{
+		_cameraBehaviour = _cameraPivot.GetComponent<CameraBehaviour>();
 		CurrentPlayerState = PlayerStates.Shooting;
 		_previousPlayerState = CurrentPlayerState;
 		_rb = this.transform.GetComponent<Rigidbody>();
+		_lineRenderer = _cameraPivot.GetComponent<LineRenderer>();
 	}
 
 	// Update is called once per frame
@@ -68,6 +68,9 @@ public class GolfBallBehaviour : MonoBehaviour
 				UpdateSpectatingControls();
 				break;
 			case PlayerStates.Placing:
+				break;
+			case PlayerStates.Finished:
+				_rb.isKinematic = true;
 				break;
 			default:
 				break;
@@ -93,6 +96,7 @@ public class GolfBallBehaviour : MonoBehaviour
 			{
 				CurrentPlayerState = PlayerStates.Shooting;
 				_cameraPivot.GetComponent<CameraBehaviour>().RegisterPositions();
+				_cameraBehaviour.SpectatingPos.gameObject.SetActive(false);
 			}
 		}
 
@@ -131,7 +135,7 @@ public class GolfBallBehaviour : MonoBehaviour
 
 		#region Shoot
 
-		if (_gamepad.buttonSouth.wasPressedThisFrame && _rb.velocity == Vector3.zero && _gamepad.leftStick.ReadValue() != Vector2.zero)
+		if (_gamepad.buttonSouth.wasPressedThisFrame && _rb.velocity == Vector3.zero && _gamepad.leftStick.ReadValue() != Vector2.zero && CurrentPlayerState != PlayerStates.Finished)
 		{
 			ShootGolfBall(_controllerStickVector * _aimSpeedDirection);
 		}
@@ -151,6 +155,7 @@ public class GolfBallBehaviour : MonoBehaviour
 			if(_spectateStateToggled)
 			{
 				CurrentPlayerState = PlayerStates.Spectating;
+				_cameraBehaviour.SpectatingPos.gameObject.SetActive(true);
 			}
 		}
 
@@ -164,7 +169,11 @@ public class GolfBallBehaviour : MonoBehaviour
 
 		Vector3 flatPlaneVector = new Vector3(shootingForce.x, .1f, shootingForce.z);
 		_rb.AddForce(flatPlaneVector * 10f, ForceMode.Impulse);
-
+		CurrentLevelScore++;
+		if(CurrentLevelScore == 12)
+        {
+			CurrentPlayerState = PlayerStates.Finished;
+        }
 		_lineRenderer.enabled = false;
 	}
 
@@ -178,6 +187,23 @@ public class GolfBallBehaviour : MonoBehaviour
 		{
 			_lineRenderer.enabled = false;
 		}
+	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Finish"))
+        {
+			PlayerFinished();
+        }
+    }
+
+	private void PlayerFinished()
+    {
+		//#######################################################
+		//#####Store score in total game score (game manager).###
+		//######################################################
+		CurrentLevelScore = 0;
+		CurrentPlayerState = PlayerStates.Finished;
 	}
 }
 

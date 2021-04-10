@@ -5,4 +5,5 @@ public enum PlayerStates
 	Shooting,
 	Spectating,
 	Placing,
+	Finished
 }

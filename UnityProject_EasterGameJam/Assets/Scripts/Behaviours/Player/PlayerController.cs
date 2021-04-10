@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
 
     //Player ID
-    private int ControllerID;
+    public int ControllerID;
 
     [Header("Sub Behaviours")]
     public PlayerMovementBehaviour playerMovementBehaviour;

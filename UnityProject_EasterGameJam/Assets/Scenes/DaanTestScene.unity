@@ -939,6 +939,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3410289457997980917, guid: 3ef46ee53316091489cbcc20c8b4b0df,
         type: 3}
+      propertyPath: SpectatingPos
+      value: 
+      objectReference: {fileID: 1366826405}
+    - target: {fileID: 3410289457997980917, guid: 3ef46ee53316091489cbcc20c8b4b0df,
+        type: 3}
       propertyPath: _spectatingPos
       value: 
       objectReference: {fileID: 1366826405}

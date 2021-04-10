@@ -24,7 +24,8 @@ public class CameraBehaviour : MonoBehaviour
 
     private Transform _cameraTargetPos;
     private Transform _shootingPos;
-   [SerializeField] private Transform _spectatingPos;
+    public Transform SpectatingPos;
+
 
     public bool StateChanged;
 
@@ -32,8 +33,10 @@ public class CameraBehaviour : MonoBehaviour
 	void Start()
     {
         _golfBall = TargettedGolfBall.GetComponent<GolfBallBehaviour>();
+        _golfBall.CurrentPlayerState = PlayerStates.Shooting;
         _cameraOffset = this.transform.position + TargettedGolfBall.transform.position;
         _shootingPos = this.transform;
+       
     }
 
     // Update is called once per frame
@@ -49,7 +52,7 @@ public class CameraBehaviour : MonoBehaviour
                 _cameraTargetPos = _shootingPos;
 				break;
 			case PlayerStates.Spectating:
-                _cameraTargetPos = _spectatingPos;
+                _cameraTargetPos = SpectatingPos;
 				break;
 			case PlayerStates.Placing:
 				break;
@@ -69,20 +72,20 @@ public class CameraBehaviour : MonoBehaviour
         //this.transform.position = Vector3.Lerp(this.transform.position, TargettedGolfBall.position + _cameraOffset, Vector3.Distance(TargettedGolfBall.position, _cameraOffset) / _lerpSpeed);
         if(_golfBall.CurrentPlayerState == PlayerStates.Shooting)
         {
-
-        _shootingPos.position = TargettedGolfBall.position + _cameraOffset;
-        _shootingPos.rotation = this.transform.rotation;
+             _shootingPos.position = TargettedGolfBall.position + _cameraOffset;
+             _shootingPos.rotation = this.transform.rotation;
         }
 
-        Debug.Log(_cameraTargetPos.name);
+        
 
-        this.transform.position = Vector3.SmoothDamp(this.transform.position, _cameraTargetPos.position, ref _currentCameraVelocity, .3f);
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, _cameraTargetPos.rotation, Time.deltaTime);
+        this.transform.position = Vector3.SmoothDamp(this.transform.position, TargettedGolfBall.position + _cameraOffset, ref _currentCameraVelocity, .3f);
+        //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, _cameraTargetPos.rotation, Time.deltaTime);
     }
 
     public void RegisterPositions()
     {
-        _shootingPos.position = TargettedGolfBall.position + _cameraOffset;
-        _shootingPos.rotation = this.transform.rotation;
+
+        //_shootingPos.position = TargettedGolfBall.position + _cameraOffset;
+        //_shootingPos.rotation = this.transform.rotation;
     }
 }

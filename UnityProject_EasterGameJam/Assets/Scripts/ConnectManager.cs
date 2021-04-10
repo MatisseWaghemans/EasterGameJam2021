@@ -12,9 +12,14 @@ public class ConnectManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (_gameManager.CanConnect() == true)
+		if (_gameManager.CanConnect())
 		{
 			_gameManager.ConnectGamepads();
 		}
+
+        if (_gameManager.CanDisconnect())
+        {
+            _gameManager.DisconnectGamepads();
+        }
 	}
 }
