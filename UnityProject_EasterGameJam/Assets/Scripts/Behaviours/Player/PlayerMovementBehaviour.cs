@@ -35,8 +35,8 @@ public class PlayerMovementBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        MoveThePlayer();
-        TurnThePlayer();
+        //MoveThePlayer();
+        //TurnThePlayer();
     }
 
     void MoveThePlayer()

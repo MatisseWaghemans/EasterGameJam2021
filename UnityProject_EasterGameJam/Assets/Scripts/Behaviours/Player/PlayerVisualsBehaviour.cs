@@ -26,10 +26,10 @@ public class PlayerVisualsBehaviour : MonoBehaviour
         playerID = newPlayerID;
         playerInput = newPlayerInput;
 
-        SetupShaderIDs();
+		SetupShaderIDs();
 
-        UpdatePlayerVisuals();
-    }
+		UpdatePlayerVisuals();
+	}
 
     void SetupShaderIDs()
     {

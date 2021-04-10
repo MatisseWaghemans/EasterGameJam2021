@@ -46,8 +46,8 @@ public class PlayerController : MonoBehaviour
             return false;
 		}
 
-        playerMovementBehaviour.SetupBehaviour();
-        playerAnimationBehaviour.SetupBehaviour();
+        //playerMovementBehaviour.SetupBehaviour();
+        //playerAnimationBehaviour.SetupBehaviour();
         playerVisualsBehaviour.SetupBehaviour(playerID, playerInput);
 
         return true;
@@ -151,9 +151,9 @@ public class PlayerController : MonoBehaviour
     //Update Loop - Used for calculating frame-based data
     void Update()
     {
-        CalculateMovementInputSmoothing();
-        UpdatePlayerMovement();
-        UpdatePlayerAnimationMovement();
+        //CalculateMovementInputSmoothing();
+        //UpdatePlayerMovement();
+        //UpdatePlayerAnimationMovement();
     }
 
     //Input's Axes values are raw

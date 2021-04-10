@@ -191,8 +191,10 @@ public class GameManager : MonoBehaviour
             Scene scene = SceneManager.GetActiveScene();
             if (scene.name == "SelectionScreen")
             {
+                UIManager uiManager = this.GetComponentInChildren<UIManager>();
+                uiManager.StartGame.SetActive(false);
                 Debug.Log("Load game scene");
-                //SceneManager.LoadScene();
+                SceneManager.LoadScene("Level01");
             }
         }
     }

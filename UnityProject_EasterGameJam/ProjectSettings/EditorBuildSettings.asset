@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectionScreen.unity
     guid: 187085ef77ec1b147a0251b88246da77
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level01.unity
+    guid: ed82e28d4d7e8bb4a8ee8de12b58517e
   m_configObjects: {}
