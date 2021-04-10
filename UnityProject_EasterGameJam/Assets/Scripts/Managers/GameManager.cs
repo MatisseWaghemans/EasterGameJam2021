@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
                 var text = spawns[_playerId].GetComponentInChildren<TMPro.TMP_Text>();
                 var image = spawns[_playerId].GetComponentInChildren<SpriteRenderer>();
                 text.text = "Press        To Leave";
-                image.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                image.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
         }
     }
@@ -313,7 +313,7 @@ public class GameManager : MonoBehaviour
         var text = spawns[i].GetComponentInChildren<TMPro.TMP_Text>();
         var image = spawns[i].GetComponentInChildren<SpriteRenderer>();
         text.text = "Press        To Leave";
-        image.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0)); 
+        image.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0)); 
         return spawns[i].transform.position;
     }
 
