@@ -12,6 +12,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Course
+    second: {fileID: 2100000, guid: 2aa3767f85afeef4399bdda7e885d3c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Course dark
+    second: {fileID: 2100000, guid: 7c4c1e1d35f1aac438d6e24f5e9fb1da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Holle
     second: {fileID: 2100000, guid: 7c4c1e1d35f1aac438d6e24f5e9fb1da, type: 2}
   - first:
