@@ -15,11 +15,14 @@ public class CameraBehaviour : MonoBehaviour
 
     public Transform TargettedGolfBall;
 
+    private Vector3 _currentCameraVelocity = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.transform.position = TargettedGolfBall.transform.position;
         _cameraOffset = this.transform.position - TargettedGolfBall.transform.position;
+
     }
 
     // Update is called once per frame
@@ -35,7 +38,9 @@ public class CameraBehaviour : MonoBehaviour
         {
             this.transform.Rotate(Vector3.up, gamepad.rightStick.x.ReadValue() * _rotationSpeed);
         }
-
-        this.transform.position = Vector3.Lerp(this.transform.position, TargettedGolfBall.position + _cameraOffset, Vector3.Distance(TargettedGolfBall.position, _cameraOffset) / _lerpSpeed);
+        
+        //this.transform.position = Vector3.Lerp(this.transform.position, TargettedGolfBall.position + _cameraOffset, Vector3.Distance(TargettedGolfBall.position, _cameraOffset) / _lerpSpeed);
+    
+        this.transform.position = Vector3.SmoothDamp(this.transform.position, TargettedGolfBall.position + _cameraOffset, ref _currentCameraVelocity, .3f);
     }
 }
