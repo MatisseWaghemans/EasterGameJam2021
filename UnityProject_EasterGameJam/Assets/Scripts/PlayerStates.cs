@@ -1,6 +1,8 @@
 
 public enum PlayerStates
 {
+	Paused,
 	Shooting,
-	Looking,
+	Spectating,
+	Placing,
 }

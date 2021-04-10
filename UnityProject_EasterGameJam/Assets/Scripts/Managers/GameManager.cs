@@ -31,7 +31,13 @@ public class GameManager : Singleton<GameManager>
     private List<PlayerController> _activePlayerControllers;
     private PlayerInput _checkInput;
 
-    void Start()
+	private PlayerStates _currentPlayerState;
+
+	private PlayerStates _perviousPlayerState;
+
+
+
+	void Start()
     {
         _checkInput = this.transform.GetComponent<PlayerInput>();
         _activePlayerControllers = new List<PlayerController>();
@@ -140,12 +146,28 @@ public class GameManager : Singleton<GameManager>
 
         UpdateActivePlayerInputs();
 
-        SwitchFocusedPlayerControlScheme();
+        SwitchFocusedPlayerControlScheme(PlayerStates.Paused);
 
         UpdateUIMenu();
     }
 
-    void UpdateActivePlayerInputs()
+	public void ToggleSpectatingState(PlayerController newFocusedPlayerController)
+	{
+		focusedPlayerController = newFocusedPlayerController;
+
+		UpdateActivePlayerInputs();
+
+		SwitchFocusedPlayerControlScheme(PlayerStates.Spectating);
+
+		UpdateUIMenu();
+	}
+
+	public void ExitState(PlayerController newFocusedPlayerController)
+	{
+		Debug.Log("Exit state");
+	}
+
+	void UpdateActivePlayerInputs()
     {
         for(int i = 0; i < _activePlayerControllers.Count; i++)
         {
@@ -157,18 +179,33 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    void SwitchFocusedPlayerControlScheme()
+    void SwitchFocusedPlayerControlScheme(PlayerStates playerState)
     {
-        switch(isPaused)
+        switch(playerState)
         {
-            case true:
-                focusedPlayerController.EnablePauseMenuControls();
+            case PlayerStates.Paused:
+				if(isPaused)
+				{
+					focusedPlayerController.EnablePauseMenuControls();
+				}
+				else
+				{
+					focusedPlayerController.EnableGameplayControls();
+				}
                 break;
 
-            case false:
+            case PlayerStates.Shooting:
                 focusedPlayerController.EnableGameplayControls();
                 break;
-        }
+
+			case PlayerStates.Spectating:
+				focusedPlayerController.EnableSpectatingControls();
+				break;
+
+			case PlayerStates.Placing:
+				focusedPlayerController.EnablePlacementControls();
+				break;
+		}
     }
 
     void UpdateUIMenu()

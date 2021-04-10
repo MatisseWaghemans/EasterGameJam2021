@@ -25,9 +25,11 @@ public class PlayerController : MonoBehaviour
     //Action Maps
     private string actionMapPlayerControls = "Player Controls";
     private string actionMapMenuControls = "Menu Controls";
+	private string actionMapSpectatingControls = "Spectating Controls";
+	private string actionMapPlacementControls = "Placement Controls";
 
-    //Current Control Scheme
-    private string currentControlScheme;
+	//Current Control Scheme
+	private string currentControlScheme;
 
 
     //This is called from the GameManager; when the game is being setup.
@@ -79,11 +81,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //INPUT SYSTEM AUTOMATIC CALLBACKS --------------
+	public void OnExitState(InputAction.CallbackContext value)
+	{
+		if (value.started)
+		{
+			GameManager.Instance.ExitState(this);
+		}
+	}
 
-    //This is automatically called from PlayerInput, when the input device has changed
-    //(IE: Keyboard -> Xbox Controller)
-    public void OnControlsChanged()
+	//INPUT SYSTEM AUTOMATIC CALLBACKS --------------
+
+	//This is automatically called from PlayerInput, when the input device has changed
+	//(IE: Keyboard -> Xbox Controller)
+	public void OnControlsChanged()
     {
 
         if(playerInput.currentControlScheme != currentControlScheme)
@@ -186,9 +196,18 @@ public class PlayerController : MonoBehaviour
         playerInput.SwitchCurrentActionMap(actionMapMenuControls);
     }
 
+	public void EnableSpectatingControls()
+	{
+		playerInput.SwitchCurrentActionMap(actionMapSpectatingControls);
+	}
 
-    //Get Data ----
-    public int GetPlayerID()
+	public void EnablePlacementControls()
+	{
+		playerInput.SwitchCurrentActionMap(actionMapPlacementControls);
+	}
+
+	//Get Data ----
+	public int GetPlayerID()
     {
         return playerID;
     }
