@@ -4,79 +4,94 @@ using UnityEngine;
 
 public class PlacementController : MonoBehaviour
 {
-    [SerializeField] private LayerMask _placeableMask;
-    public GameObject[] placeableObjectPrefab;
+	[SerializeField] private LayerMask _placeableMask;
+	public GameObject[] placeableObjectPrefab;
 
-    private GameObject currentPlaceableObject;
-    private float mouseWheelRotation;
-    private int currentPrefabIndex = 1;
+	private GameObject currentPlaceableObject;
+	private float mouseWheelRotation;
+	private int currentPrefabIndex = 1;
 
+	private bool _isRaycastValid = false;
 
-    void Update()
-    {
-        HandleNewObjectHotkey();
+	[SerializeField]
+	private Transform _controllerPointer;
 
-        if (currentPlaceableObject != null)
-        {
-            MoveCurrentObjectToMouse();
-            RotateFromMouseWheel();
-            ReleaseIfClicked();
-        }
-    }
+	public static PlacementController Instance;
 
-    private void HandleNewObjectHotkey()
-    {
-        for (int i = 0; i < placeableObjectPrefab.Length; i++)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha0 + 1 + i))
-            {
-                if (PressedKeyOfCurrentPrefab(i))
-                {
-                    Destroy(currentPlaceableObject);
-                    currentPrefabIndex = -1;
-                }
-                else
-                {
-                    if (currentPlaceableObject != null)
-                    {
-                        Destroy(currentPlaceableObject);
-                    }
-                    currentPlaceableObject = Instantiate(placeableObjectPrefab[i]);
-                    currentPrefabIndex = i;
-                }
-                break;
-            }
-        }
-    }
+	protected void Awake()
+	{
+		Instance = this;
+	}
 
-    private bool PressedKeyOfCurrentPrefab(int i)
-    {
-        return currentPlaceableObject != null && currentPrefabIndex == i;
-    }
+	void Update()
+	{
+		if (currentPlaceableObject != null)
+		{
+			MoveCurrentObjectToPointer();
+			RotateFromMouseWheel();
+		}
 
-    private void MoveCurrentObjectToMouse()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		if (_isRaycastValid == false)
+		{
+			currentPlaceableObject = null;
+		}
+	}
 
-        if (Physics.Raycast(ray, out var hitInfo, _placeableMask))
-        {
-            currentPlaceableObject.transform.position = hitInfo.point;
-            currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
-        }
-    }
+	public void HandleNewObjectHotkey()
+	{
+		for (int i = 0; i < placeableObjectPrefab.Length; i++)
+		{
+			//if (Input.GetKeyDown(KeyCode.Alpha0 + 1 + i))
+			//{
+				if (PressedKeyOfCurrentPrefab(i))
+				{
+					Destroy(currentPlaceableObject);
+					currentPrefabIndex = -1;
+				}
+				else
+				{
+					if (currentPlaceableObject != null)
+					{
+						Destroy(currentPlaceableObject);
+					}
+					currentPlaceableObject = Instantiate(placeableObjectPrefab[i]);
+					currentPrefabIndex = i;
+				}
+				break;
+			//}
+		}
+	}
 
-    private void RotateFromMouseWheel()
-    {
-        Debug.Log(Input.mouseScrollDelta);
-        mouseWheelRotation += Input.mouseScrollDelta.y;
-        currentPlaceableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
-    }
+	private bool PressedKeyOfCurrentPrefab(int i)
+	{
+		return currentPlaceableObject != null && currentPrefabIndex == i;
+	}
 
-    private void ReleaseIfClicked()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            currentPlaceableObject = null;
-        }
-    }
+	private void MoveCurrentObjectToPointer()
+	{
+		if (Physics.Raycast(_controllerPointer.position, -Vector3.up, out var hitInfo, _placeableMask))
+		{
+			currentPlaceableObject.transform.position = hitInfo.point;
+			currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+			_isRaycastValid = true;
+		}
+		else
+		{
+			_isRaycastValid = false;
+		}
+	}
+
+	private void RotateFromMouseWheel()
+	{
+		//Debug.Log(Input.mouseScrollDelta);
+		mouseWheelRotation += Input.mouseScrollDelta.y;
+		currentPlaceableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
+	}
+
+	public void ReleaseObject()
+	{
+
+		currentPlaceableObject = null;
+
+	}
 }

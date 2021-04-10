@@ -388,17 +388,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Placement",
-                    "type": "Value",
-                    "id": "5b422347-8086-4704-833a-a9e4ae135461",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Attack",
+                    "name": "PlaceObstacle",
                     "type": "Button",
                     "id": "f1959672-2368-4709-8f8c-ae157109c7f5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "SelectNextObstacle",
+                    "type": "Button",
+                    "id": "7a3025a2-e43b-4d04-b21c-03884e7f5662",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press"
@@ -516,7 +516,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Attack",
+                    "action": "PlaceObstacle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -527,29 +527,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard And Mouse",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6f6d60d0-e6c8-483a-9e5f-dfc3a0cac58d",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard And Mouse",
-                    "action": "Placement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9fb1ad7a-139f-41ef-a942-e7e2afa2c775",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Placement",
+                    "action": "PlaceObstacle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -572,6 +550,28 @@
                     "processors": "",
                     "groups": "Keyboard And Mouse",
                     "action": "Exit State",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45aef03b-b01d-4287-aa36-6747b5066c29",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SelectNextObstacle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f541a3b-97e6-4ce7-a796-3baa719e4bae",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard And Mouse",
+                    "action": "SelectNextObstacle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
