@@ -10,6 +10,8 @@ public class CameraBehaviour : MonoBehaviour
     [Tooltip("Higher number means slower lerp time") ]
     [SerializeField] private float _lerpSpeed = 1;
 
+    [SerializeField] private float _rotationSpeed = 1.5f;
+
 
     public Transform TargettedGolfBall;
 
@@ -27,11 +29,11 @@ public class CameraBehaviour : MonoBehaviour
 
         if (gamepad.rightStick.x.ReadValue() >= 0)
         {
-            this.transform.Rotate(Vector3.up, gamepad.rightStick.x.ReadValue());
+            this.transform.Rotate(Vector3.up, gamepad.rightStick.x.ReadValue() * _rotationSpeed);
         }
         if (gamepad.rightStick.x.ReadValue() <= 0)
         {
-            this.transform.Rotate(Vector3.up, gamepad.rightStick.x.ReadValue());
+            this.transform.Rotate(Vector3.up, gamepad.rightStick.x.ReadValue() * _rotationSpeed);
         }
 
         this.transform.position = Vector3.Lerp(this.transform.position, TargettedGolfBall.position + _cameraOffset, Vector3.Distance(TargettedGolfBall.position, _cameraOffset) / _lerpSpeed);

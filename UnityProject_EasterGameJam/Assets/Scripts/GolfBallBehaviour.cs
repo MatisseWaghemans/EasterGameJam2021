@@ -8,7 +8,7 @@ public class GolfBallBehaviour : MonoBehaviour
 
     [SerializeField] private Transform _cameraPivot;
 
-    [SerializeField] private float _aimSpeed;
+    [SerializeField] private float _aimSpeedDirection;
 
     private float _controllerStickValue;
     private Vector3 _controllerStickVector;
@@ -17,15 +17,12 @@ public class GolfBallBehaviour : MonoBehaviour
 
     Vector3 _aimDirection;
 
+    private bool _ableToShoot = false;
+
 
     // Update is called once per frame
     void Update()
     {
-        //TODO: change this to right input controller.
-        
-
-      
-
 
         //joystick direction 
 
@@ -45,8 +42,10 @@ public class GolfBallBehaviour : MonoBehaviour
 
         if (_gamepad.leftStick.ReadValue() != Vector2.zero)
         {
-            Debug.DrawLine(this.transform.position, _aimDirection * _aimSpeed);
-            Debug.Log(this.transform.position);
+            Debug.DrawLine(this.transform.position, this.transform.position + _aimDirection * _aimSpeedDirection);
+            _cameraPivot.GetComponent<LineRenderer>().SetPosition(0, this.transform.position);
+            _cameraPivot.GetComponent<LineRenderer>().SetPosition(1, this.transform.position + _aimDirection * _aimSpeedDirection);
+            Debug.Log(_aimDirection);
         }
 
  
@@ -54,19 +53,22 @@ public class GolfBallBehaviour : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (_gamepad.leftStick.ReadValue().magnitude < .01 && _controllerStickValue > .05)
+        if (_gamepad.leftStick.ReadValue().magnitude < .01f && _controllerStickValue > .05f)
         {
             Debug.Log("Shoot");
             Debug.Log(_controllerStickVector);
 
-            ShootGolfBall(_controllerStickVector * _aimSpeed);
+            if (_ableToShoot)
+            {
+                ShootGolfBall(_controllerStickVector * _aimSpeedDirection);
+            }
             
         }
 
         _controllerStickValue = _gamepad.leftStick.ReadValue().magnitude;
         _controllerStickVector = _aimDirection;
-            
 
+        CheckVelocity(this.GetComponent<Rigidbody>());
 
 
        // Debug.Log(_gamepad.leftStick.ReadValue().magnitude);
@@ -76,5 +78,21 @@ public class GolfBallBehaviour : MonoBehaviour
     {
         Vector3 flatPlaneVector = new Vector3(shootingForce.x, 0, shootingForce.z);
         this.GetComponent<Rigidbody>().AddForce(flatPlaneVector * 10f, ForceMode.Impulse);
+    }
+
+    private void CheckVelocity(Rigidbody rb)
+    {
+        if(rb.velocity.magnitude > .8f)
+        {
+            _cameraPivot.GetComponent<LineRenderer>().enabled = false;
+            _ableToShoot = false;
+        }
+        else
+        {
+            _ableToShoot = true;
+            rb.velocity = Vector3.zero;
+            _cameraPivot.GetComponent<LineRenderer>().enabled = true;
+
+        }
     }
 }
