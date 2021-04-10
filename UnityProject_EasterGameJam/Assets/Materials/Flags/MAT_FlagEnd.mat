@@ -130,7 +130,7 @@ Material:
     - _noiseScale: 0.1
     - _noiseSeed: 0
     - _windDensity: 0.5
-    - _windStrenght: 3
+    - _windStrenght: 1
     m_Colors:
     - Color_ae5e6ee69c5f453b83e2637660240906: {r: 0.8962264, g: 0.30015132, b: 0.3156743,
         a: 1}
@@ -138,7 +138,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _windMovement: {r: 0.25, g: 0, b: 0, a: 0}
+    - _windMovement: {r: 0, g: 0.25, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7465449199134290489
 MonoBehaviour:

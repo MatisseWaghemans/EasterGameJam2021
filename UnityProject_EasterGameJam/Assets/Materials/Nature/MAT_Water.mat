@@ -40,12 +40,12 @@ Material:
     - Vector1_EE5E73F4: 0.1
     - _alpha: 0.5
     - _metalicness: 0
-    - _noiseScale: 0.1
-    - _ripelDencity: 0.5
-    - _ripelSlimness: 2.5
-    - _ripelSpeed: 1
+    - _noiseScale: 0.05
+    - _ripelDencity: 0.25
+    - _ripelSlimness: 3
+    - _ripelSpeed: 0.5
     - _smoothness: 0
-    - _waveDencity: 0.25
+    - _waveDencity: 0.5
     - _waveSpeed: 2
     m_Colors:
     - _ripelColor: {r: 0.4880423, g: 2.118547, b: 1.841251, a: 1}
