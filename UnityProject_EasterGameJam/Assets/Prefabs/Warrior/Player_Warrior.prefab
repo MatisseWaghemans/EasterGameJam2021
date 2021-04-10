@@ -447,10 +447,13 @@ MonoBehaviour:
     m_ActionId: df938fa9-5245-4fcc-a90b-2ed245e5a9f3
     m_ActionName: Spectating Controls/TogglePause[/Keyboard/p,/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 0
+<<<<<<< Updated upstream
   m_DefaultControlScheme: 
   m_DefaultActionMap: cb4067f3-a685-4c86-b9ea-46a6eabfada7
+=======
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Menu Controls
+>>>>>>> Stashed changes
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!136 &1743518200311987067
