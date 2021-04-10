@@ -136,7 +136,7 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _noiseScale: 1
+    - _noiseScale: 0.5
     - _noiseSeed: 0
     - _windDensity: 0.5
     - _windStrenght: 0.25
