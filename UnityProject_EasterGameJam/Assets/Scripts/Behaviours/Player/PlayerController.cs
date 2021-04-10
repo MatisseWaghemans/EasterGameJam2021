@@ -31,10 +31,13 @@ public class PlayerController : MonoBehaviour
 	//Current Control Scheme
 	private string currentControlScheme;
 
+    public bool IsDisconnected = false;
+
 
     //This is called from the GameManager; when the game is being setup.
     public bool TrySetupPlayer(int newPlayerID)
     {
+        Debug.Log($"tried connecting: {playerInput.currentControlScheme}");
         playerID = newPlayerID;
 
         currentControlScheme = playerInput.currentControlScheme;
@@ -81,7 +84,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-	public void OnExitState(InputAction.CallbackContext value)
+    public void OnSubmit(InputAction.CallbackContext value)
+    {
+        Debug.Log("Submit button pressed");
+        if (value.started)
+        {
+            GameManager.Instance.Submit(this);
+        }
+    }
+
+    public void OnExitState(InputAction.CallbackContext value)
 	{
 		if (value.started)
 		{
@@ -112,6 +124,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnDeviceLost()
     {
+        IsDisconnected = true;
+        GameManager.Instance.TryActivateStart();
         playerVisualsBehaviour.SetDisconnectedDeviceVisuals();
     }
 
@@ -125,6 +139,8 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         playerVisualsBehaviour.UpdatePlayerVisuals();
+        IsDisconnected = false;
+        GameManager.Instance.TryActivateStart();
     }
 
 

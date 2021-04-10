@@ -8,8 +8,8 @@ public class UIMenuBehaviour : MonoBehaviour
 {
 
     [Header("Sub-Behaviours")]
-    public UIContextPanelsBehaviour uiContextPanelsBehaviour;
-    public UIPanelRebindBehaviour uiPanelRebindBehaviour;
+    //public UIContextPanelsBehaviour uiContextPanelsBehaviour;
+    //public UIPanelRebindBehaviour uiPanelRebindBehaviour;
 
     [Header("Core Object References")]
     public GameObject uiMenuCameraObject;
@@ -35,7 +35,7 @@ public class UIMenuBehaviour : MonoBehaviour
         switch (newState)
         {
             case true:
-                ResetContextPanels();
+                //ResetContextPanels();
                 UpdateEventSystemDefaultSelected();
                 UpdateEventSystemUIInputModule();
                 UpdateUIPlayerDisplay();
@@ -52,7 +52,7 @@ public class UIMenuBehaviour : MonoBehaviour
 
     void ResetContextPanels()
     {
-        uiContextPanelsBehaviour.SetupContextPanels();
+        //uiContextPanelsBehaviour.SetupContextPanels();
     }
 
     
@@ -89,12 +89,12 @@ public class UIMenuBehaviour : MonoBehaviour
 
     void UpdateUIRebindActions()
     {
-        uiPanelRebindBehaviour.UpdateRebindActions();
+        //uiPanelRebindBehaviour.UpdateRebindActions();
     }
 
     public void SwitchUIContextPanels(int selectedPanelID)
     {
-        uiContextPanelsBehaviour.UpdateContextPanels(selectedPanelID);
+        //uiContextPanelsBehaviour.UpdateContextPanels(selectedPanelID);
     }
     
 }

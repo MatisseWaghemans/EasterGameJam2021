@@ -1,14 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public enum GameMode
 {
     LocalMultiplayer
 }
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
     //Game Mode
     public GameMode currentGameMode;
@@ -32,12 +34,25 @@ public class GameManager : Singleton<GameManager>
     private PlayerInput _checkInput;
 
 	private PlayerStates _currentPlayerState;
-
 	private PlayerStates _perviousPlayerState;
 
+    private bool _canStart = false;
 
+    public static GameManager Instance;
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
 
-	void Start()
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    void Start()
     {
         _checkInput = this.transform.GetComponent<PlayerInput>();
         _activePlayerControllers = new List<PlayerController>();
@@ -106,17 +121,35 @@ public class GameManager : Singleton<GameManager>
         Vector3 spawnPosition = CalculateSpawnPosition(_spawnIndex);
         Quaternion spawnRotation = CalculateSpawnRotation(_spawnIndex);
 
-        if (_checkInput.currentControlScheme != "Gamepad")
-        {
-            GameObject spawnedPlayer = Instantiate(playerPrefab, spawnPosition, spawnRotation) as GameObject;
+        GameObject spawnedPlayer = Instantiate(playerPrefab, spawnPosition, spawnRotation) as GameObject;
 
-            if (spawnedPlayer.GetComponent<PlayerController>().TrySetupPlayer(_spawnIndex))
-            {
-                _spawnIndex++;
-                AddPlayerToActivePlayerList(spawnedPlayer.GetComponent<PlayerController>());
-            }
+        if (spawnedPlayer.GetComponent<PlayerController>().TrySetupPlayer(_spawnIndex))
+        {
+            _spawnIndex++;
+            AddPlayerToActivePlayerList(spawnedPlayer.GetComponent<PlayerController>());
+            TryActivateStart();
         }
     }
+
+	public void TryActivateStart()
+	{
+		if (_activePlayerControllers.Count > 1)
+		{
+            UIManager uiManager = this.GetComponentInChildren<UIManager>();
+			for (int i = 0; i < _activePlayerControllers.Count; i++)
+			{
+				if (_activePlayerControllers[i].IsDisconnected)
+				{
+                    _canStart = false;
+                    uiManager.StartGame.SetActive(false);
+                    return;
+				}
+            }
+
+            uiManager.StartGame.SetActive(true);
+            _canStart = true;
+        }
+	}
 
 	void AddPlayerToActivePlayerList(PlayerController newPlayer)
     {
@@ -151,7 +184,20 @@ public class GameManager : Singleton<GameManager>
         UpdateUIMenu();
     }
 
-	public void ToggleSpectatingState(PlayerController newFocusedPlayerController)
+    public void Submit(PlayerController newFocusedPlayerController)
+    {
+		if (_canStart)
+		{
+            Scene scene = SceneManager.GetActiveScene();
+            if (scene.name == "SelectionScreen")
+            {
+                Debug.Log("Load game scene");
+                //SceneManager.LoadScene();
+            }
+        }
+    }
+
+    public void ToggleSpectatingState(PlayerController newFocusedPlayerController)
 	{
 		focusedPlayerController = newFocusedPlayerController;
 
@@ -175,12 +221,12 @@ public class GameManager : Singleton<GameManager>
             {
                 _activePlayerControllers[i].SetInputActiveState(isPaused);
             }
-
         }
     }
 
     void SwitchFocusedPlayerControlScheme(PlayerStates playerState)
     {
+        Scene activeScene = SceneManager.GetActiveScene();
         switch(playerState)
         {
             case PlayerStates.Paused:
@@ -190,7 +236,10 @@ public class GameManager : Singleton<GameManager>
 				}
 				else
 				{
-					focusedPlayerController.EnableGameplayControls();
+					if (activeScene.name != "SelectionScreen")
+					{
+					    focusedPlayerController.EnableGameplayControls();
+					}
 				}
                 break;
 
@@ -261,6 +310,24 @@ public class GameManager : Singleton<GameManager>
     Quaternion CalculateSpawnRotation(int i)
     {
         return spawns[i].transform.rotation;
+    }
+
+    public void Restart()
+    {
+        for (int i = 0; i < _activePlayerControllers.Count; i++)
+        {
+            PlayerController controller = _activePlayerControllers[i];
+            _activePlayerControllers.Remove(controller);
+            Destroy(controller.gameObject);
+        }
+
+        _checkInput = this.transform.GetComponent<PlayerInput>();
+        _activePlayerControllers = new List<PlayerController>();
+        isPaused = false;
+        _spawnIndex = 0;
+
+        SetupBasedOnGameState();
+        SetupUI();
     }
 
 }
