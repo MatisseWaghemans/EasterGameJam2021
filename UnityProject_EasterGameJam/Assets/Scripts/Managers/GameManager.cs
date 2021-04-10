@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
                 _playerId--;
 
                 spawns[_playerId].GetComponentInChildren<TMPro.TMP_Text>().text = "Press        To Join";
-                spawns[_playerId].GetComponentInChildren<Image>().transform.eulerAngles = new Vector3(0, 0, 0);
+                spawns[_playerId].GetComponentInChildren<Image>().rectTransform.eulerAngles = new Vector3(0, 0, 0);
             }
         }
     }
