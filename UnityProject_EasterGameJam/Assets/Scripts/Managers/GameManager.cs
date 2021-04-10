@@ -17,10 +17,10 @@ public class GameManager : MonoBehaviour
 
     //Local Multiplayer
     public GameObject playerPrefab;
+    [SerializeField]
     private int _maxNumberOfPlayers = 4;
 
     //Spawned Players
-    private List<PlayerController> activePlayerControllers;
     private bool isPaused;
     private PlayerController focusedPlayerController;
 
@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
 
     private int _playerId = 0;
     private List<PlayerController> _activePlayerControllers;
-    private PlayerInput _checkInput;
     private List<Gamepad> _usedGamepads;
 
 	private PlayerStates _currentPlayerState;
@@ -57,12 +56,10 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        _checkInput = this.transform.GetComponent<PlayerInput>();
         _activePlayerControllers = new List<PlayerController>();
         _usedGamepads = new List<Gamepad>();
         isPaused = false;
 
-        SetupBasedOnGameState();
         SetupUI();
     }
 
@@ -73,7 +70,6 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Debug.Log($"found gamepad: {Gamepad.all[i].name}");
-
             }
             if (Gamepad.all[i].buttonEast.isPressed)
             {
@@ -92,23 +88,6 @@ public class GameManager : MonoBehaviour
     public bool CanConnect()
     {
         return _activePlayerControllers.Count < _maxNumberOfPlayers;
-    }
-
-	void SetupBasedOnGameState()
-    {
-        switch(currentGameMode)
-        {
-            case GameMode.LocalMultiplayer:
-                SetupLocalMultiplayer();
-                break;
-        }
-    }
-
-    void SetupLocalMultiplayer()
-    { 
-        //SpawnPlayers();
-
-        //SetupActivePlayers();
     }
 
     void SpawnPlayer(int controllerId)
@@ -150,14 +129,6 @@ public class GameManager : MonoBehaviour
     {
         _activePlayerControllers.Add(newPlayer);
     }
-
-    //void SetupActivePlayers()
-    //{
-    //    for(int i = 0; i < activePlayerControllers.Count; i++)
-    //    {
-    //        activePlayerControllers[i].TrySetupPlayer(i);
-    //    }
-    //}
 
     void SetupUI()
     {
@@ -318,12 +289,10 @@ public class GameManager : MonoBehaviour
             Destroy(controller.gameObject);
         }
 
-        _checkInput = this.transform.GetComponent<PlayerInput>();
         _activePlayerControllers = new List<PlayerController>();
         isPaused = false;
         _playerId = 0;
 
-        SetupBasedOnGameState();
         SetupUI();
     }
 
