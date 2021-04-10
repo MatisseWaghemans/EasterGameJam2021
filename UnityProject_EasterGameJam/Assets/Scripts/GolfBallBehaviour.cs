@@ -125,7 +125,7 @@ public class GolfBallBehaviour : MonoBehaviour
 		{
 			// Debug.DrawLine(this.transform.position, this.transform.position + _aimDirection * _aimSpeedDirection);
 			_lineRenderer.SetPosition(0, this.transform.position);
-			_lineRenderer.SetPosition(1, this.transform.position + _aimDirection * _aimSpeedDirection);
+			_lineRenderer.SetPosition(1, this.transform.position + _aimDirection * _aimSpeedDirection/2);
 			//Debug.Log(_aimDirection);
 		}
 
@@ -167,7 +167,7 @@ public class GolfBallBehaviour : MonoBehaviour
 	private void ShootGolfBall(Vector3 shootingForce)
 	{
 
-		Vector3 flatPlaneVector = new Vector3(shootingForce.x, .1f, shootingForce.z);
+		Vector3 flatPlaneVector = new Vector3(shootingForce.x, .05f, shootingForce.z);
 		_rb.AddForce(flatPlaneVector * 10f, ForceMode.Impulse);
 		CurrentLevelScore++;
 		if(CurrentLevelScore == 12)
