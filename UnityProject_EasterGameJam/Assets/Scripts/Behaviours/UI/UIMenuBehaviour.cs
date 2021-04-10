@@ -73,7 +73,7 @@ public class UIMenuBehaviour : MonoBehaviour
         IDDisplayText.SetText((focusedPlayerID + 1).ToString());
 
         //Color
-        Color focusedPlayerDeviceColor = deviceDisplayconfigurator.GetDeviceColor(focusedPlayerController.GetPlayerInput());
+        Color focusedPlayerDeviceColor = deviceDisplayconfigurator.GetDeviceColor(focusedPlayerController.playerInput);
         deviceDisplayIcon.color = focusedPlayerDeviceColor;
     }
 
