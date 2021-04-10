@@ -26,7 +26,7 @@ public class UIFunctions : MonoBehaviour
 	private IEnumerator LoadScene(string sceneName)
 	{
 
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(6f);
 		Debug.Log("scene loaded : " + sceneName);
 		SceneManager.LoadScene(sceneName);
 
