@@ -13,22 +13,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.09487492, y: 0.09487477, z: 4.047438}
   m_Center: {x: -0.00000012062284, y: -0.00000003232073, z: 2.023719}
---- !u!111 &3508679250497316961
-Animation:
+--- !u!114 &148529173331928961
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7662289501900833617}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 0c90da898bb0fd24d8b8b4fd2b80a636, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6145adaf6b263049ad469bb52b6b146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _positionAmplitude: {x: 0, y: 0.25, z: 0}
+  _positionFrequency: {x: 0, y: 1, z: 0}
+  _rotAmplitude: {x: 0, y: 22.5, z: 0}
+  _rotFrequency: {x: 0, y: 0.5, z: 0}
+  _scalingAmplitude: {x: 0, y: 0, z: 0}
+  _scalingFrequency: {x: 0, y: 0, z: 0}
+  _randomOffset: 0
+  _offset: 0
 --- !u!1001 &7391676260655316480
 PrefabInstance:
   m_ObjectHideFlags: 0

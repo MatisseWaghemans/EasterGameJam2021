@@ -1484,7 +1484,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"9e14453deb371e0418f03e1f38b74b6a\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"0355999dc56fc544784ebf35a32fec28\",\"type\":3}}",
         "m_Guid": ""
     },
     "m_Modifiable": true,
@@ -1524,7 +1524,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"d7e04508888534945b3ec11bbf253e2a\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"0355999dc56fc544784ebf35a32fec28\",\"type\":3}}",
         "m_Guid": ""
     },
     "m_Modifiable": true,
@@ -4232,7 +4232,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "AlphaClipThreshold",
     "m_StageCapability": 2,
-    "m_Value": 0.10000000149011612,
+    "m_Value": 1.0,
     "m_DefaultValue": 0.5,
     "m_Labels": []
 }
@@ -5023,7 +5023,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"9deb2e9c9786fbe45b3e6a6a91c3e733\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"320443e075030a14fa22d972d0ae301d\",\"type\":3}}",
         "m_Guid": ""
     },
     "m_Modifiable": true,
@@ -5651,7 +5651,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"1cb868b6428148a44a690dce8cdcfa2d\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"10e56cbc1169c0b4a8a9d5bb33d0185a\",\"type\":3}}",
         "m_Guid": ""
     },
     "m_Modifiable": true,
