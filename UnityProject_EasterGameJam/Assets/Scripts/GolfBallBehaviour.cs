@@ -49,9 +49,13 @@ public class GolfBallBehaviour : MonoBehaviour
             //Debug.Log(_aimDirection);
         }
 
-        if (_gamepad.buttonSouth.isPressed)
+        if (_gamepad.buttonSouth.wasPressedThisFrame)
         {
             _buttonPressed = true;
+        }
+        if (_gamepad.buttonSouth.wasReleasedThisFrame)
+        {
+            _buttonPressed = false;
         }
 
     }
@@ -65,7 +69,7 @@ public class GolfBallBehaviour : MonoBehaviour
         //   ShootGolfBall(_controllerStickVector * _aimSpeedDirection);
 
         //}
-
+        Debug.Log(_buttonPressed);
         if (_buttonPressed)
         {
             ShootGolfBall(_controllerStickVector * _aimSpeedDirection);
