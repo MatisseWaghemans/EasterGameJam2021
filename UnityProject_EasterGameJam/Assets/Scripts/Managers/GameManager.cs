@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     //Local Multiplayer
     public GameObject playerPrefab;
-    public int numberOfPlayers;
+    private int _maxNumberOfPlayers = 4;
 
     //Spawned Players
     private List<PlayerController> activePlayerControllers;
@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     private int _adjustControllerCount = 0;
     private List<PlayerController> _activePlayerControllers;
     private PlayerInput _checkInput;
+    private List<Gamepad> _usedGamepads;
 
 	private PlayerStates _currentPlayerState;
 	private PlayerStates _perviousPlayerState;
@@ -65,24 +66,20 @@ public class GameManager : MonoBehaviour
 	private void Update()
     {
         _adjustControllerCount = 0;
-        for (int i = 0; i < Input.GetJoystickNames().Length; i++)
+        for (int i = 0; i < _maxNumberOfPlayers; i++)
         {
-			if (Input.GetKey(KeyCode.Space))
-			{
-                Debug.Log($"joystick {i}: {Input.GetJoystickNames()[i]}");
-            }
 
-            if (Input.GetJoystickNames()[i] == string.Empty)
-            {
-                _adjustControllerCount++;
+			if (Gamepad.all[i].buttonEast.isPressed)
+			{
+                if (_usedGamepads.Contains(Gamepad.all[i]))
+                    return;
+                else
+                {
+                    SpawnPlayer();
+                    _usedGamepads.Add(Gamepad.all[i]);
+                }
             }
         }
-
-        if (Input.GetJoystickNames().Length - _adjustControllerCount > _activePlayerControllers.Count)
-		{
-            Debug.Log("spawn player");
-            SpawnPlayer();
-		}
 	}
 
 	void SetupBasedOnGameState()
