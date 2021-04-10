@@ -29,8 +29,7 @@ public class DeviceDisplayConfigurator : ScriptableObject
 
     public string GetDeviceName(PlayerInput playerInput)
     {
-
-        string currentDeviceRawPath = playerInput.devices[0].ToString();
+        string currentDeviceRawPath= playerInput.devices[0].ToString();
 
         string newDisplayName = null;
 
@@ -54,10 +53,9 @@ public class DeviceDisplayConfigurator : ScriptableObject
 
     
     public Color GetDeviceColor(PlayerInput playerInput)
-    {  
-
+    {
         string currentDeviceRawPath = playerInput.devices[0].ToString();
-        
+
         Color newDisplayColor = fallbackDisplayColor;
 
         for(int i = 0; i < listDeviceSets.Count; i++)

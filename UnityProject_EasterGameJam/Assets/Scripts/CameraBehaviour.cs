@@ -15,21 +15,25 @@ public class CameraBehaviour : MonoBehaviour
 	[SerializeField]
 	private Gamepad _gamepad;
 
-	[SerializeField]
+	
 	private GolfBallBehaviour _golfBall;
 
 	public Transform TargettedGolfBall;
 
     private Vector3 _currentCameraVelocity = Vector3.zero;
 
-	public bool StateChanged;
+    private Transform _cameraTargetPos;
+    private Transform _shootingPos;
+   [SerializeField] private Transform _spectatingPos;
+
+    public bool StateChanged;
 
 	// Start is called before the first frame update
 	void Start()
     {
-        this.transform.position = TargettedGolfBall.transform.position;
-        _cameraOffset = this.transform.position - TargettedGolfBall.transform.position;
-
+        _golfBall = TargettedGolfBall.GetComponent<GolfBallBehaviour>();
+        _cameraOffset = this.transform.position + TargettedGolfBall.transform.position;
+        _shootingPos = this.transform;
     }
 
     // Update is called once per frame
@@ -42,8 +46,10 @@ public class CameraBehaviour : MonoBehaviour
 			case PlayerStates.Paused:
 				break;
 			case PlayerStates.Shooting:
+                _cameraTargetPos = _shootingPos;
 				break;
 			case PlayerStates.Spectating:
+                _cameraTargetPos = _spectatingPos;
 				break;
 			case PlayerStates.Placing:
 				break;
@@ -51,17 +57,32 @@ public class CameraBehaviour : MonoBehaviour
 				break;
 		}
 
-        if (_gamepad.rightStick.x.ReadValue() >= 0)
+        if (_gamepad.rightStick.x.ReadValue() >= 0 && _golfBall.CurrentPlayerState == PlayerStates.Shooting)
         {
-            this.transform.Rotate(Vector3.up, _gamepad.rightStick.x.ReadValue() * _rotationSpeed);
+            this.transform.RotateAround(TargettedGolfBall.position, Vector3.up, _gamepad.rightStick.x.ReadValue() * _rotationSpeed);
         }
-        if (_gamepad.rightStick.x.ReadValue() <= 0)
+        if (_gamepad.rightStick.x.ReadValue() <= 0 && _golfBall.CurrentPlayerState == PlayerStates.Shooting)
         {
-            this.transform.Rotate(Vector3.up, _gamepad.rightStick.x.ReadValue() * _rotationSpeed);
+            this.transform.RotateAround(TargettedGolfBall.position, Vector3.up, _gamepad.rightStick.x.ReadValue() * _rotationSpeed);
         }
-        
+
         //this.transform.position = Vector3.Lerp(this.transform.position, TargettedGolfBall.position + _cameraOffset, Vector3.Distance(TargettedGolfBall.position, _cameraOffset) / _lerpSpeed);
-    
-        this.transform.position = Vector3.SmoothDamp(this.transform.position, TargettedGolfBall.position + _cameraOffset, ref _currentCameraVelocity, .3f);
+        if(_golfBall.CurrentPlayerState == PlayerStates.Shooting)
+        {
+
+        _shootingPos.position = TargettedGolfBall.position + _cameraOffset;
+        _shootingPos.rotation = this.transform.rotation;
+        }
+
+        Debug.Log(_cameraTargetPos.name);
+
+        this.transform.position = Vector3.SmoothDamp(this.transform.position, _cameraTargetPos.position, ref _currentCameraVelocity, .3f);
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, _cameraTargetPos.rotation, Time.deltaTime);
+    }
+
+    public void RegisterPositions()
+    {
+        _shootingPos.position = TargettedGolfBall.position + _cameraOffset;
+        _shootingPos.rotation = this.transform.rotation;
     }
 }

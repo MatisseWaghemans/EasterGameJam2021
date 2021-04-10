@@ -8,13 +8,12 @@ public class PlayerController : MonoBehaviour
 {
 
     //Player ID
-    private int playerID;
+    private int ControllerID;
 
     [Header("Sub Behaviours")]
     public PlayerMovementBehaviour playerMovementBehaviour;
     public PlayerAnimationBehaviour playerAnimationBehaviour;
     public PlayerVisualsBehaviour playerVisualsBehaviour;
-
 
     [Header("Input Settings")]
     public PlayerInput playerInput;
@@ -33,24 +32,21 @@ public class PlayerController : MonoBehaviour
 
     public bool IsDisconnected = false;
 
+    private Material _material;
+
 
     //This is called from the GameManager; when the game is being setup.
-    public bool TrySetupPlayer(int newPlayerID)
+    public void SetupPlayer(int newControllerID, Material material)
     {
         Debug.Log($"tried connecting: {playerInput.currentControlScheme}");
-        playerID = newPlayerID;
+        ControllerID = newControllerID;
+
+        this.GetComponentInChildren<MeshRenderer>().material = material;
+        _material = material;
 
         currentControlScheme = playerInput.currentControlScheme;
-		if (currentControlScheme != "Gamepad")
-		{
-            return false;
-		}
 
-        //playerMovementBehaviour.SetupBehaviour();
-        //playerAnimationBehaviour.SetupBehaviour();
-        playerVisualsBehaviour.SetupBehaviour(playerID, playerInput);
-
-        return true;
+        playerVisualsBehaviour.SetupBehaviour(ControllerID, playerInput);
     }
 
 
@@ -143,11 +139,6 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.TryActivateStart();
     }
 
-
-
-
-
-
     //Update Loop - Used for calculating frame-based data
     void Update()
     {
@@ -225,7 +216,7 @@ public class PlayerController : MonoBehaviour
 	//Get Data ----
 	public int GetPlayerID()
     {
-        return playerID;
+        return ControllerID;
     }
 
     public InputActionAsset GetActionAsset()

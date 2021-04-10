@@ -7,7 +7,7 @@ public class PlayerVisualsBehaviour : MonoBehaviour
 {
 
     //Player ID
-    private int playerID;
+    private int controllerID;
     private PlayerInput playerInput;
 
     [Header("Device Display Settings")]
@@ -21,9 +21,9 @@ public class PlayerVisualsBehaviour : MonoBehaviour
 
     private int clothingTintShaderID;
 
-    public void SetupBehaviour(int newPlayerID, PlayerInput newPlayerInput)
+    public void SetupBehaviour(int newControllerID, PlayerInput newPlayerInput)
     {
-        playerID = newPlayerID;
+        controllerID = newControllerID;
         playerInput = newPlayerInput;
 
 		SetupShaderIDs();
@@ -33,7 +33,7 @@ public class PlayerVisualsBehaviour : MonoBehaviour
 
     void SetupShaderIDs()
     {
-        clothingTintShaderID = Shader.PropertyToID("_Clothing_Tint");
+        //clothingTintShaderID = Shader.PropertyToID("_Clothing_Tint");
     }
 
     public void UpdatePlayerVisuals()
@@ -44,7 +44,7 @@ public class PlayerVisualsBehaviour : MonoBehaviour
 
     void UpdateUIDisplay()
     {
-        playerUIDisplayBehaviour.UpdatePlayerIDDisplayText(playerID);
+        playerUIDisplayBehaviour.UpdatePlayerIDDisplayText(controllerID);
         
         string deviceName = deviceDisplaySettings.GetDeviceName(playerInput);
         playerUIDisplayBehaviour.UpdatePlayerDeviceNameDisplayText(deviceName);
@@ -56,7 +56,7 @@ public class PlayerVisualsBehaviour : MonoBehaviour
     void UpdateCharacterShader()
     {
         Color deviceColor = deviceDisplaySettings.GetDeviceColor(playerInput);
-        playerSkinnedMeshRenderer.material.SetColor(clothingTintShaderID, deviceColor);
+        //playerSkinnedMeshRenderer.material.SetColor(clothingTintShaderID, deviceColor);
     }
 
     public void SetDisconnectedDeviceVisuals()
@@ -66,7 +66,7 @@ public class PlayerVisualsBehaviour : MonoBehaviour
 
         Color disconnectedColor = deviceDisplaySettings.GetDisconnectedColor();
         playerUIDisplayBehaviour.UpdatePlayerIconDisplayColor(disconnectedColor);
-        playerSkinnedMeshRenderer.material.SetColor(clothingTintShaderID, disconnectedColor);
+        //playerSkinnedMeshRenderer.material.SetColor(clothingTintShaderID, disconnectedColor);
         
     }
 }
