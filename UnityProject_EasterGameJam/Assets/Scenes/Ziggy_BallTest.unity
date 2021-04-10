@@ -344,6 +344,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WindMill
       objectReference: {fileID: 0}
+    - target: {fileID: 267938634422032749, guid: a77c98dc62649a04a97fce0500dcf888,
+        type: 3}
+      propertyPath: m_Materials.Array.data[7]
+      value: 
+      objectReference: {fileID: 2100000, guid: d0131c09aae3d4f4d8b6d257d3c43306, type: 2}
     - target: {fileID: 776711357724937480, guid: a77c98dc62649a04a97fce0500dcf888,
         type: 3}
       propertyPath: m_RootOrder
@@ -398,6 +403,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389463674162729596, guid: a77c98dc62649a04a97fce0500dcf888,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a77c98dc62649a04a97fce0500dcf888, type: 3}
