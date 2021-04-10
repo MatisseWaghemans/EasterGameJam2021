@@ -111,8 +111,10 @@ public class GameManager : MonoBehaviour
                 _activePlayerControllers.Remove(_activePlayerControllers[i]);
                 _playerId--;
 
-                spawns[_playerId].GetComponentInChildren<TMPro.TMP_Text>().text = "Press        To Join";
-                spawns[_playerId].GetComponentInChildren<Image>().rectTransform.eulerAngles = new Vector3(0, 0, 0);
+                var text = spawns[_playerId].GetComponentInChildren<TMPro.TMP_Text>();
+                var image = spawns[_playerId].GetComponentInChildren<Image>();
+                text.text = "Press        To Leave";
+                image.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
         }
     }
@@ -308,8 +310,10 @@ public class GameManager : MonoBehaviour
     //Spawn Utilities
     private Vector3 CalculateSpawnPosition(int i)
     {
-        spawns[i].GetComponentInChildren<TMPro.TMP_Text>().text = "Press        To Leave";
-        spawns[i].GetComponentInChildren<Image>().transform.eulerAngles = new Vector3(0, 180, 0); 
+        var text = spawns[i].GetComponentInChildren<TMPro.TMP_Text>();
+        var image = spawns[i].GetComponentInChildren<Image>();
+        text.text = "Press        To Leave";
+        image.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 180, 0)); 
         return spawns[i].transform.position;
     }
 
