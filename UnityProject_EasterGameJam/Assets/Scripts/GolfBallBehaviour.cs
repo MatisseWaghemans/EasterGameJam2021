@@ -13,31 +13,48 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	[SerializeField] private float _aimSpeedDirection;
 
-	private float _controllerStickValue;
-	private Vector3 _controllerStickVector;
+	[SerializeField]
+	private CameraBehaviour _cameraBehaviour;
 
-	Gamepad _gamepad = Gamepad.current;
 
-	Vector3 _aimDirection;
-
-	private bool _ableToShoot = false;
-
-	private bool _buttonPressed = false;
+	public PlayerStates CurrentPlayerState
+	{
+		get { return _currentPlayerState; }
+		set
+		{
+			_cameraBehaviour.StateChanged = true;
+			_currentPlayerState = value;
+		}
+	}
 
 	private PlayerStates _currentPlayerState;
 
 	private PlayerStates _previousPlayerState;
 
+	private float _controllerStickValue;
+
+	private Vector3 _controllerStickVector;
+
+	private Gamepad _gamepad = Gamepad.current;
+
+	private Vector3 _aimDirection;
+
+	private bool _ableToShoot = false;
+
+	private bool _southButtonPressed = false;
+
+	private bool _spectateStateToggled = false;
+
 	private void Start()
 	{
-		_currentPlayerState = PlayerStates.Shooting;
-		_previousPlayerState = _currentPlayerState;
+		CurrentPlayerState = PlayerStates.Shooting;
+		_previousPlayerState = CurrentPlayerState;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		switch (_currentPlayerState)
+		switch (CurrentPlayerState)
 		{
 			case PlayerStates.Paused:
 				break;
@@ -45,6 +62,7 @@ public class GolfBallBehaviour : MonoBehaviour
 				UpdatePlayerShootingControls();
 				break;
 			case PlayerStates.Spectating:
+				UpdateSpectatingControls();
 				break;
 			case PlayerStates.Placing:
 				break;
@@ -52,6 +70,29 @@ public class GolfBallBehaviour : MonoBehaviour
 				break;
 		}
 
+	}
+
+	private void UpdateSpectatingControls()
+	{
+		#region Spectate Movement
+
+		// ADD MOVEMENT TOP DOWN CAMERA
+
+		#endregion
+
+		#region To Spectate
+
+		if (_gamepad.buttonNorth.wasPressedThisFrame)
+		{
+			_spectateStateToggled = !_spectateStateToggled;
+
+			if (_spectateStateToggled)
+			{
+				CurrentPlayerState = PlayerStates.Shooting;
+			}
+		}
+
+		#endregion
 	}
 
 	private void UpdatePlayerShootingControls()
@@ -80,36 +121,38 @@ public class GolfBallBehaviour : MonoBehaviour
 			//Debug.Log(_aimDirection);
 		}
 
-		if (_gamepad.buttonSouth.wasPressedThisFrame)
-		{
-			_buttonPressed = true;
-		}
-		if (_gamepad.buttonSouth.wasReleasedThisFrame)
-		{
-			_buttonPressed = false;
-		}
-	}
-
-	private void FixedUpdate()
-	{
-		CheckVelocity(this.GetComponent<Rigidbody>());
-
-		//if (_gamepad.leftStick.ReadValue().magnitude < .01f && _controllerStickValue > .1f && this.transform.GetComponent<Rigidbody>().velocity == Vector3.zero)
-		//{
-
-		//   ShootGolfBall(_controllerStickVector * _aimSpeedDirection);
-
-		//}
-		Debug.Log(_buttonPressed);
-		if (_buttonPressed)
-		{
-			ShootGolfBall(_controllerStickVector * _aimSpeedDirection);
-			_buttonPressed = false;
-		}
 
 		_controllerStickValue = _gamepad.leftStick.ReadValue().magnitude;
 		_controllerStickVector = _aimDirection;
 
+		#region Shoot
+
+		if (_gamepad.buttonSouth.wasPressedThisFrame)
+		{
+			ShootGolfBall(_controllerStickVector * _aimSpeedDirection);
+		}
+		if (_gamepad.buttonSouth.wasReleasedThisFrame)
+		{
+			
+		}
+
+		#endregion
+
+		#region To Spectate
+
+		if (_gamepad.buttonNorth.wasPressedThisFrame)
+		{
+			_spectateStateToggled = !_spectateStateToggled;
+
+			if(_spectateStateToggled)
+			{
+				CurrentPlayerState = PlayerStates.Spectating;
+			}
+		}
+
+		#endregion
+
+		CheckVelocity(this.GetComponent<Rigidbody>());
 	}
 
 	private void ShootGolfBall(Vector3 shootingForce)

@@ -12,13 +12,20 @@ public class CameraBehaviour : MonoBehaviour
 
     [SerializeField] private float _rotationSpeed = 1.5f;
 
+	[SerializeField]
+	private Gamepad _gamepad;
 
-    public Transform TargettedGolfBall;
+	[SerializeField]
+	private GolfBallBehaviour _golfBall;
+
+	public Transform TargettedGolfBall;
 
     private Vector3 _currentCameraVelocity = Vector3.zero;
 
-    // Start is called before the first frame update
-    void Start()
+	public bool StateChanged;
+
+	// Start is called before the first frame update
+	void Start()
     {
         this.transform.position = TargettedGolfBall.transform.position;
         _cameraOffset = this.transform.position - TargettedGolfBall.transform.position;
@@ -28,15 +35,29 @@ public class CameraBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var gamepad = Gamepad.current;
+		_gamepad = Gamepad.current;
 
-        if (gamepad.rightStick.x.ReadValue() >= 0)
+		switch (_golfBall.CurrentPlayerState)
+		{
+			case PlayerStates.Paused:
+				break;
+			case PlayerStates.Shooting:
+				break;
+			case PlayerStates.Spectating:
+				break;
+			case PlayerStates.Placing:
+				break;
+			default:
+				break;
+		}
+
+        if (_gamepad.rightStick.x.ReadValue() >= 0)
         {
-            this.transform.Rotate(Vector3.up, gamepad.rightStick.x.ReadValue() * _rotationSpeed);
+            this.transform.Rotate(Vector3.up, _gamepad.rightStick.x.ReadValue() * _rotationSpeed);
         }
-        if (gamepad.rightStick.x.ReadValue() <= 0)
+        if (_gamepad.rightStick.x.ReadValue() <= 0)
         {
-            this.transform.Rotate(Vector3.up, gamepad.rightStick.x.ReadValue() * _rotationSpeed);
+            this.transform.Rotate(Vector3.up, _gamepad.rightStick.x.ReadValue() * _rotationSpeed);
         }
         
         //this.transform.position = Vector3.Lerp(this.transform.position, TargettedGolfBall.position + _cameraOffset, Vector3.Distance(TargettedGolfBall.position, _cameraOffset) / _lerpSpeed);
