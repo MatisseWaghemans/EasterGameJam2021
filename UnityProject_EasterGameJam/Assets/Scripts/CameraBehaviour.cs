@@ -34,7 +34,7 @@ public class CameraBehaviour : MonoBehaviour
     {
         _golfBall = TargettedGolfBall.GetComponent<GolfBallBehaviour>();
         _golfBall.CurrentPlayerState = PlayerStates.Shooting;
-        _cameraOffset = this.transform.position + TargettedGolfBall.transform.position;
+        _cameraOffset = this.transform.position - TargettedGolfBall.transform.position;
         _shootingPos = this.transform;
        
     }
