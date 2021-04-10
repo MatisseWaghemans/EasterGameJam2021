@@ -129,6 +129,7 @@ Material:
     - _ZWrite: 1
     - _noiseScale: 0.1
     - _noiseSeed: 0
+    - _smoothness: 0.25
     - _windDensity: 0.5
     - _windStrenght: 1
     m_Colors:
