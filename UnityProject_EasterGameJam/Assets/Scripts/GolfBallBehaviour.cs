@@ -19,6 +19,8 @@ public class GolfBallBehaviour : MonoBehaviour
 
     private bool _ableToShoot = false;
 
+    [SerializeField] private float _minimumSpeed = .8f;
+
 
     // Update is called once per frame
     void Update()
@@ -82,7 +84,7 @@ public class GolfBallBehaviour : MonoBehaviour
 
     private void CheckVelocity(Rigidbody rb)
     {
-        if(rb.velocity.magnitude > .8f)
+        if(rb.velocity.magnitude > _minimumSpeed)
         {
             _cameraPivot.GetComponent<LineRenderer>().enabled = false;
             _ableToShoot = false;
