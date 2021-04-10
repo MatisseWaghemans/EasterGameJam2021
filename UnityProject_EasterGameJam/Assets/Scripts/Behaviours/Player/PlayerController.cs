@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
 	public void OnExitState(InputAction.CallbackContext value)
 	{
 		if (value.started)
@@ -88,6 +89,25 @@ public class PlayerController : MonoBehaviour
 			GameManager.Instance.ExitState(this);
 		}
 	}
+=======
+    public void OnSubmit(InputAction.CallbackContext value)
+    {
+        if (value.started)
+        {
+            GameManager.Instance.Submit(this);
+        }
+    }
+
+    public void OnCancel(InputAction.CallbackContext value)
+    {
+        if (value.started)
+        {
+            GameManager.Instance.Cancel(this);
+        }
+    }
+
+    //INPUT SYSTEM AUTOMATIC CALLBACKS --------------
+>>>>>>> Stashed changes
 
 	//INPUT SYSTEM AUTOMATIC CALLBACKS --------------
 
@@ -113,6 +133,8 @@ public class PlayerController : MonoBehaviour
     public void OnDeviceLost()
     {
         playerVisualsBehaviour.SetDisconnectedDeviceVisuals();
+
+        //display UI untill reconnected
     }
 
 
@@ -125,12 +147,8 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         playerVisualsBehaviour.UpdatePlayerVisuals();
+        //remove disconnected UI
     }
-
-
-
-
-
 
     //Update Loop - Used for calculating frame-based data
     void Update()
@@ -145,9 +163,7 @@ public class PlayerController : MonoBehaviour
 
     void CalculateMovementInputSmoothing()
     {
-        
         smoothInputMovement = Vector3.Lerp(smoothInputMovement, rawInputMovement, Time.deltaTime * movementSmoothingSpeed);
-
     }
 
     void UpdatePlayerMovement()
@@ -183,9 +199,6 @@ public class PlayerController : MonoBehaviour
 
 
     //Switching Action Maps ----
-
-
-    
     public void EnableGameplayControls()
     {
         playerInput.SwitchCurrentActionMap(actionMapPlayerControls);  
@@ -196,6 +209,7 @@ public class PlayerController : MonoBehaviour
         playerInput.SwitchCurrentActionMap(actionMapMenuControls);
     }
 
+<<<<<<< Updated upstream
 	public void EnableSpectatingControls()
 	{
 		playerInput.SwitchCurrentActionMap(actionMapSpectatingControls);
@@ -208,6 +222,10 @@ public class PlayerController : MonoBehaviour
 
 	//Get Data ----
 	public int GetPlayerID()
+=======
+    //Get Data ----
+    public int GetPlayerID()
+>>>>>>> Stashed changes
     {
         return playerID;
     }
