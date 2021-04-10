@@ -16,6 +16,8 @@ public class GolfBallBehaviour : MonoBehaviour
 	[SerializeField]
 	private CameraBehaviour _cameraBehaviour;
 
+	private Rigidbody _rb;
+
 
 	public PlayerStates CurrentPlayerState
 	{
@@ -49,6 +51,7 @@ public class GolfBallBehaviour : MonoBehaviour
 	{
 		CurrentPlayerState = PlayerStates.Shooting;
 		_previousPlayerState = CurrentPlayerState;
+		_rb = this.transform.GetComponent<Rigidbody>();
 	}
 
 	// Update is called once per frame
@@ -89,6 +92,7 @@ public class GolfBallBehaviour : MonoBehaviour
 			if (_spectateStateToggled)
 			{
 				CurrentPlayerState = PlayerStates.Shooting;
+				_cameraPivot.GetComponent<CameraBehaviour>().RegisterPositions();
 			}
 		}
 
@@ -113,7 +117,7 @@ public class GolfBallBehaviour : MonoBehaviour
 			_aimDirection.Normalize();
 		}
 
-		if (_gamepad.leftStick.ReadValue() != Vector2.zero && this.transform.GetComponent<Rigidbody>().velocity == Vector3.zero)
+		if (_gamepad.leftStick.ReadValue() != Vector2.zero && _rb.velocity == Vector3.zero)
 		{
 			// Debug.DrawLine(this.transform.position, this.transform.position + _aimDirection * _aimSpeedDirection);
 			_lineRenderer.SetPosition(0, this.transform.position);
@@ -127,7 +131,7 @@ public class GolfBallBehaviour : MonoBehaviour
 
 		#region Shoot
 
-		if (_gamepad.buttonSouth.wasPressedThisFrame)
+		if (_gamepad.buttonSouth.wasPressedThisFrame && _rb.velocity == Vector3.zero && _gamepad.leftStick.ReadValue() != Vector2.zero)
 		{
 			ShootGolfBall(_controllerStickVector * _aimSpeedDirection);
 		}
@@ -152,14 +156,14 @@ public class GolfBallBehaviour : MonoBehaviour
 
 		#endregion
 
-		CheckVelocity(this.GetComponent<Rigidbody>());
+		CheckVelocity(_rb);
 	}
 
 	private void ShootGolfBall(Vector3 shootingForce)
 	{
 
-		Vector3 flatPlaneVector = new Vector3(shootingForce.x, .2f, shootingForce.z);
-		this.GetComponent<Rigidbody>().AddForce(flatPlaneVector * 10f, ForceMode.Impulse);
+		Vector3 flatPlaneVector = new Vector3(shootingForce.x, .1f, shootingForce.z);
+		_rb.AddForce(flatPlaneVector * 10f, ForceMode.Impulse);
 
 		_lineRenderer.enabled = false;
 	}
