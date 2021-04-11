@@ -153,16 +153,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ControllerPointer: {fileID: 0}
-  GolfBallBehaviours: []
   _isHoldingItem: 0
   _placeable: 0
-  PickUpObjectLayer:
-    serializedVersion: 2
-    m_Bits: 8192
-  LevelManager: {fileID: 0}
   CurrentObject: {fileID: 0}
   TranslateSpeed: 0.2
   RotationSpeed: 0.3
+  matGreen: {fileID: 0}
+  matRed: {fileID: 0}
 --- !u!4 &144882155
 Transform:
   m_ObjectHideFlags: 0
@@ -192,43 +189,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 129.81499
+      objectReference: {fileID: 0}
+    - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 129.81499
+      objectReference: {fileID: 0}
+    - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 129.81499
+      objectReference: {fileID: 0}
+    - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.163353
+      value: 24.591
       objectReference: {fileID: 0}
     - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.64
+      value: 7.38
       objectReference: {fileID: 0}
     - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.59807587
+      value: 1.47
       objectReference: {fileID: 0}
     - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071066
       objectReference: {fileID: 0}
     - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.70710707
       objectReference: {fileID: 0}
     - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8518645020123167041, guid: b5ec91b7601e24b41910bb207bfd41d7,
         type: 3}
@@ -402,10 +414,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1743518200311987064, guid: 5d2565e79c15218419deb866acf423ee,
+        type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 054d9d84-632a-4c38-8bc6-e163bbdb6af5
+      objectReference: {fileID: 0}
     - target: {fileID: 1743518200311987069, guid: 5d2565e79c15218419deb866acf423ee,
         type: 3}
       propertyPath: m_Name
       value: Player_GolfBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882906312180043230, guid: 5d2565e79c15218419deb866acf423ee,
+        type: 3}
+      propertyPath: matRed
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e1f3657d66dcc942939dcf254eb5b95, type: 2}
+    - target: {fileID: 2882906312180043230, guid: 5d2565e79c15218419deb866acf423ee,
+        type: 3}
+      propertyPath: matGreen
+      value: 
+      objectReference: {fileID: 2100000, guid: 93833f08790436b479010a2f9a21e9ad, type: 2}
+    - target: {fileID: 2882906312180043230, guid: 5d2565e79c15218419deb866acf423ee,
+        type: 3}
+      propertyPath: RotationSpeed
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d2565e79c15218419deb866acf423ee, type: 3}
@@ -564,7 +596,7 @@ GameObject:
   - component: {fileID: 1130049240}
   - component: {fileID: 1130049239}
   m_Layer: 12
-  m_Name: r
+  m_Name: PlaceAbleFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -792,10 +824,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1743518200311987064, guid: 5d2565e79c15218419deb866acf423ee,
+        type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 054d9d84-632a-4c38-8bc6-e163bbdb6af5
+      objectReference: {fileID: 0}
     - target: {fileID: 1743518200311987069, guid: 5d2565e79c15218419deb866acf423ee,
         type: 3}
       propertyPath: m_Name
       value: Player_GolfBall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882906312180043230, guid: 5d2565e79c15218419deb866acf423ee,
+        type: 3}
+      propertyPath: matRed
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e1f3657d66dcc942939dcf254eb5b95, type: 2}
+    - target: {fileID: 2882906312180043230, guid: 5d2565e79c15218419deb866acf423ee,
+        type: 3}
+      propertyPath: matGreen
+      value: 
+      objectReference: {fileID: 2100000, guid: 93833f08790436b479010a2f9a21e9ad, type: 2}
+    - target: {fileID: 2882906312180043230, guid: 5d2565e79c15218419deb866acf423ee,
+        type: 3}
+      propertyPath: RotationSpeed
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d2565e79c15218419deb866acf423ee, type: 3}
@@ -928,7 +980,7 @@ GameObject:
   - component: {fileID: 1867023191}
   - component: {fileID: 1867023190}
   m_Layer: 2
-  m_Name: err
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
