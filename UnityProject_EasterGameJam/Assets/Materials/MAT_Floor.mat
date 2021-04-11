@@ -123,7 +123,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_282E788E: {r: 0.40482235, g: 0.638, b: 0.5505584, a: 1}
+    - Color_282E788E: {r: 0.317051, g: 0.6392157, b: 0.5157193, a: 1}
     - _BaseColor: {r: 0.52156866, g: 0.07450981, b: 0.24313727, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
