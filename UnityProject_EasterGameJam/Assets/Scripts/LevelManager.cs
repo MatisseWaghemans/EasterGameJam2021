@@ -21,6 +21,9 @@ public class LevelManager : MonoBehaviour
 	private Transform[] _startTransforms;
 
 	[SerializeField]
+	private Transform _spectateTransform;
+
+	[SerializeField]
 	private SplitscreenManager _splitscreenManager;
 
     [SerializeField] 
@@ -31,8 +34,9 @@ public class LevelManager : MonoBehaviour
 
 	private GameManager _gameManager;
 	private List<PlayerController> _activePlayerControllers;
+	public List<PlayerController> PlayerControllers { get => _activePlayerControllers; }
 
-    public ILevelStates.LevelState LevelState { get; set; }
+	public ILevelStates.LevelState LevelState { get; set; }
 
 	private void Start()
 	{
@@ -53,18 +57,18 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        switch (LevelState)
-        {
-            case ILevelStates.LevelState.Overview:
-				//Debug.Log("Overview mode");
-                break;
-            case ILevelStates.LevelState.Placement:
-				Debug.Log("Placement Mode");
-                break;
-            case ILevelStates.LevelState.SplitScreen:
-				Debug.Log("Splitscreen mode");
-                break;
-        }
+    //    switch (LevelState)
+    //    {
+    //        case ILevelStates.LevelState.Overview:
+				////Debug.Log("Overview mode");
+    //            break;
+    //        case ILevelStates.LevelState.Placement:
+				//Debug.Log("Placement Mode");
+    //            break;
+    //        case ILevelStates.LevelState.SplitScreen:
+				//Debug.Log("Splitscreen mode");
+    //            break;
+    //    }
 	}
 
 	private void PlaceActivePlayers(List<PlayerController> activePlayerControllers)
@@ -72,6 +76,8 @@ public class LevelManager : MonoBehaviour
 		for (int i = 0; i < activePlayerControllers.Count; i++)
 		{
 			GameObject player = Instantiate(_gameManager.playerPrefab, _startTransforms[i].position, _startTransforms[i].rotation);
+			CameraBehaviour cameraBehaviour = player.GetComponentInChildren<CameraBehaviour>();
+			cameraBehaviour.SpectateTransform = _spectateTransform;
 
 			PlayerController playerController = player.GetComponent<PlayerController>();
 			playerController.SetupPlayer(i, _gameManager.Materials[i]);
@@ -82,6 +88,8 @@ public class LevelManager : MonoBehaviour
 	private void StartLevel()
 	{
 		_cameraOverviewBehaviour.Event.RemoveListener(StartLevel);
+
+		LevelState = ILevelStates.LevelState.SplitScreen;
 
 		//show splitscreen
 		_splitscreenManager.InitCameras(_activePlayerControllers, _startTransforms, true);

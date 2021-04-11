@@ -119,11 +119,11 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _Tilling: 0.5
+    - _Tilling: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_282E788E: {r: 0.97647065, g: 0.74509805, b: 0.4431373, a: 1}
+    - Color_282E788E: {r: 0.7075472, g: 0.55162543, b: 0.3504361, a: 1}
     - _BaseColor: {r: 0.97647065, g: 0.74509805, b: 0.4431373, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

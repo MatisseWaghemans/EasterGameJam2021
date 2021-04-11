@@ -15,7 +15,6 @@ public class CameraBehaviour : MonoBehaviour
 	[SerializeField]
 	private Gamepad _gamepad;
 
-	
 	private GolfBallBehaviour _golfBall;
 
 	public Transform TargettedGolfBall;
@@ -23,63 +22,71 @@ public class CameraBehaviour : MonoBehaviour
     private Vector3 _currentCameraVelocity = Vector3.zero;
 
     private Transform _cameraTargetPos;
-    private Transform _shootingPos;
-    public Transform SpectatingPos;
+
+	private Transform _shootingPos;
+    public Transform SpectateTransform;
 
 
     public bool StateChanged;
+    private Vector2 _lookValue;
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         _golfBall = TargettedGolfBall.GetComponent<GolfBallBehaviour>();
         _golfBall.CurrentPlayerState = PlayerStates.Shooting;
         _cameraOffset = this.transform.position - TargettedGolfBall.transform.position;
         _shootingPos = this.transform;
-       
+    }
+
+    public void OnLook(InputAction.CallbackContext value)
+    {
+        Vector2 inputLook = value.ReadValue<Vector2>();
+        _lookValue = inputLook;
     }
 
     // Update is called once per frame
     void Update()
     {
-		_gamepad = Gamepad.current;
+		//_gamepad = Gamepad.current;
 
-		switch (_golfBall.CurrentPlayerState)
-		{
-			case PlayerStates.Paused:
-				break;
-			case PlayerStates.Shooting:
-                _cameraTargetPos = _shootingPos;
-				break;
-			case PlayerStates.Spectating:
-                _cameraTargetPos = SpectatingPos;
-				break;
-			case PlayerStates.Placing:
-				break;
-			default:
-				break;
-		}
-
-        if (_gamepad.rightStick.x.ReadValue() >= 0 && _golfBall.CurrentPlayerState == PlayerStates.Shooting)
+        if (_lookValue.x > 0 && _golfBall.CurrentPlayerState == PlayerStates.Shooting)
         {
-            this.transform.RotateAround(TargettedGolfBall.position, Vector3.up, _gamepad.rightStick.x.ReadValue() * _rotationSpeed);
+            this.transform.RotateAround(TargettedGolfBall.position, Vector3.up, _lookValue.x * _rotationSpeed);
         }
-        if (_gamepad.rightStick.x.ReadValue() <= 0 && _golfBall.CurrentPlayerState == PlayerStates.Shooting)
+        else if (_lookValue.x < 0 && _golfBall.CurrentPlayerState == PlayerStates.Shooting)
         {
-            this.transform.RotateAround(TargettedGolfBall.position, Vector3.up, _gamepad.rightStick.x.ReadValue() * _rotationSpeed);
+            this.transform.RotateAround(TargettedGolfBall.position, Vector3.up, _lookValue.x * _rotationSpeed);
         }
 
-        //this.transform.position = Vector3.Lerp(this.transform.position, TargettedGolfBall.position + _cameraOffset, Vector3.Distance(TargettedGolfBall.position, _cameraOffset) / _lerpSpeed);
-        if(_golfBall.CurrentPlayerState == PlayerStates.Shooting)
+        if (_golfBall.CurrentPlayerState == PlayerStates.Shooting)
         {
              _shootingPos.position = TargettedGolfBall.position + _cameraOffset;
              _shootingPos.rotation = this.transform.rotation;
+            this.transform.position = Vector3.SmoothDamp(this.transform.position, TargettedGolfBall.position + _cameraOffset, ref _currentCameraVelocity, .3f);
         }
+    }
 
-        
-
-        this.transform.position = Vector3.SmoothDamp(this.transform.position, TargettedGolfBall.position + _cameraOffset, ref _currentCameraVelocity, .3f);
-        //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, _cameraTargetPos.rotation, Time.deltaTime);
+    public void ChangeFocus()
+    {
+        switch (_golfBall.CurrentPlayerState)
+        {
+            case PlayerStates.Paused:
+                break;
+            case PlayerStates.Shooting:
+                _cameraTargetPos = _shootingPos;
+                this.transform.rotation = _cameraTargetPos.rotation;
+                break;
+            case PlayerStates.Spectating:
+                _cameraTargetPos = SpectateTransform;
+                this.transform.position = _cameraTargetPos.position;
+                this.transform.rotation = _cameraTargetPos.rotation;
+                break;
+            case PlayerStates.Placing:
+                break;
+            default:
+                break;
+        }
     }
 
     public void RegisterPositions()
