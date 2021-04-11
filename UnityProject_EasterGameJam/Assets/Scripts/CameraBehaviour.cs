@@ -36,13 +36,25 @@ public class CameraBehaviour : MonoBehaviour
         _golfBall.CurrentPlayerState = PlayerStates.Shooting;
         _cameraOffset = this.transform.position - TargettedGolfBall.transform.position;
         _shootingPos = this.transform;
-       
+    }
+
+    public void OnLook(InputAction.CallbackContext value)
+    {
+        Vector2 inputLook = value.ReadValue<Vector2>();
+        if (inputLook.x > 0 && _golfBall.CurrentPlayerState == PlayerStates.Shooting)
+        {
+            this.transform.RotateAround(TargettedGolfBall.position, Vector3.up, inputLook.x * _rotationSpeed);
+        }
+        else if (inputLook.x < 0 && _golfBall.CurrentPlayerState == PlayerStates.Shooting)
+        {
+            this.transform.RotateAround(TargettedGolfBall.position, Vector3.up, inputLook.x * _rotationSpeed);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-		_gamepad = Gamepad.current;
+		//_gamepad = Gamepad.current;
 
 		switch (_golfBall.CurrentPlayerState)
 		{
@@ -60,23 +72,12 @@ public class CameraBehaviour : MonoBehaviour
 				break;
 		}
 
-        if (_gamepad.rightStick.x.ReadValue() >= 0 && _golfBall.CurrentPlayerState == PlayerStates.Shooting)
-        {
-            this.transform.RotateAround(TargettedGolfBall.position, Vector3.up, _gamepad.rightStick.x.ReadValue() * _rotationSpeed);
-        }
-        if (_gamepad.rightStick.x.ReadValue() <= 0 && _golfBall.CurrentPlayerState == PlayerStates.Shooting)
-        {
-            this.transform.RotateAround(TargettedGolfBall.position, Vector3.up, _gamepad.rightStick.x.ReadValue() * _rotationSpeed);
-        }
-
         //this.transform.position = Vector3.Lerp(this.transform.position, TargettedGolfBall.position + _cameraOffset, Vector3.Distance(TargettedGolfBall.position, _cameraOffset) / _lerpSpeed);
         if(_golfBall.CurrentPlayerState == PlayerStates.Shooting)
         {
              _shootingPos.position = TargettedGolfBall.position + _cameraOffset;
              _shootingPos.rotation = this.transform.rotation;
         }
-
-        
 
         this.transform.position = Vector3.SmoothDamp(this.transform.position, TargettedGolfBall.position + _cameraOffset, ref _currentCameraVelocity, .3f);
         //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, _cameraTargetPos.rotation, Time.deltaTime);

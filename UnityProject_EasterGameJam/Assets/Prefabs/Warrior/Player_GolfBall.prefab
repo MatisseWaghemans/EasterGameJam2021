@@ -305,7 +305,19 @@ MonoBehaviour:
     m_ActionId: 548e32fd-77d1-40e5-8197-32ca56b41bc0
     m_ActionName: Player Controls/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/DualShock4GamepadHID/leftStick,/XInputControllerWindows/leftStick]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1347105900333604122}
+        m_TargetAssemblyTypeName: CameraBehaviour, Assembly-CSharp
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8ebbde1f-3044-41bc-bdac-430e0eae1a68
     m_ActionName: Player Controls/Look[/Mouse/delta,/DualShock4GamepadHID/rightStick,/XInputControllerWindows/rightStick]
   - m_PersistentCalls:
@@ -1301,6 +1313,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2429433376540511540}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1347105900333604122 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3676895960440197166, guid: 719e707e89478f24ebb95271e2ba0d66,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429433376540511540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d31f061d1c226964e9257c5ba855a99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4459172332049462868
 PrefabInstance:
   m_ObjectHideFlags: 0
