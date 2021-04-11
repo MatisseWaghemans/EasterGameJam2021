@@ -332,7 +332,7 @@ public class GameManager : MonoBehaviour
     {
         _texts[i].GetComponent<TMP_Text>().text = "Press        To Leave";
         //var text = spawns[i].GetComponentInChildren<TMP_Text>();
-        var image = spawns[i].GetComponentInChildren<SpriteRenderer>();
+        var image = _texts[i].GetComponentInChildren<SpriteRenderer>();
         //text.text = "Press        To Leave";
         image.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0)); 
         return spawns[i].transform.position;
