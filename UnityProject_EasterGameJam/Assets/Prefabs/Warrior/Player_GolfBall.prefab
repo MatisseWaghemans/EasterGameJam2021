@@ -6271,6 +6271,11 @@ PrefabInstance:
       objectReference: {fileID: 4996676335294591436}
     - target: {fileID: 8108799752580633499, guid: a3b1372b9ddae5a4c87df278f409e6ec,
         type: 3}
+      propertyPath: _playerController
+      value: 
+      objectReference: {fileID: 1743518200311987065}
+    - target: {fileID: 8108799752580633499, guid: a3b1372b9ddae5a4c87df278f409e6ec,
+        type: 3}
       propertyPath: _aimSpeedDirection
       value: 2
       objectReference: {fileID: 0}

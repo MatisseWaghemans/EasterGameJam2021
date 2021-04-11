@@ -12,9 +12,13 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	[SerializeField] private Renderer _arrowRenderer;
 
+	[SerializeField] private PlayerController _playerController;
+
 	[SerializeField] private float _velocityThreshhold = 0.05f;
 
 	private LevelManager _levelManager;
+
+	
 
 	[SerializeField]
 	private ParticleSystem _hitParticle;
@@ -269,6 +273,8 @@ public class GolfBallBehaviour : MonoBehaviour
 		//#######################################################
 		//#####Store score in total game score (game manager).		ALS GE EEN NIEUW LEVEL LAADT -> rigidbody constraints afzetten###
 		//######################################################
+		GameManager.Instance.TotalPlayerScores[_playerController.ControllerID] += CurrentLevelScore;
+
 		CurrentLevelScore = 0;
 		CurrentPlayerState = PlayerStates.Finished;
 
