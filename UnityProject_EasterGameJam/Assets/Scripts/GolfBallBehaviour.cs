@@ -16,6 +16,11 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	private LevelManager _levelManager;
 
+	[SerializeField]
+	private ParticleSystem _hitParticle;
+
+	[SerializeField]
+	private Transform _hitParticleParent;
 
 
 	private LineRenderer _lineRenderer;
@@ -80,6 +85,12 @@ public class GolfBallBehaviour : MonoBehaviour
 	//	}
 
 	//}
+
+	private void Update()
+	{
+		_hitParticleParent.transform.position = transform.position;
+		_hitParticleParent.transform.LookAt(this.transform.position + _aimDirection * _aimSpeedDirection / 2);
+	}
 
 	private void UpdateSpectatingControls()
 	{
@@ -201,7 +212,9 @@ public class GolfBallBehaviour : MonoBehaviour
 		_resetShotPosition = this.transform.position;
 		Vector3 flatPlaneVector = new Vector3(shootingForce.x, .05f, shootingForce.z);
 		_rb.AddForce(flatPlaneVector * 10f, ForceMode.Impulse);
-		
+
+		_hitParticle.Play();
+
 		if (CurrentLevelScore == 12)
 		{
 			CurrentPlayerState = PlayerStates.Finished;
