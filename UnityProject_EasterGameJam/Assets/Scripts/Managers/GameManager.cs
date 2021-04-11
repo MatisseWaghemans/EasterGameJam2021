@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < Gamepad.all.Count; i++)
         {
-            if (Gamepad.all[i] != null)
+            if (Gamepad.all[i] != null && !_usedGamepads.Contains(Gamepad.all[i]))
             {
                 _texts[i].SetActive(true);
             }
