@@ -229,3 +229,72 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4303075311797415869}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5707276642097131890
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4340662243198584918}
+    m_Modifications:
+    - target: {fileID: 2984278932015632533, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984278932015632533, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984278932015632533, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984278932015632533, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984278932015632533, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984278932015632533, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000014106499
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984278932015632533, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.00000007549791
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984278932015632533, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00000007549789
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984278932015632533, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984278932015632533, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984278932015632533, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984278932015632534, guid: fb5f8f932dba14244b3ac90762261081,
+        type: 3}
+      propertyPath: m_Name
+      value: Lighthouse
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fb5f8f932dba14244b3ac90762261081, type: 3}

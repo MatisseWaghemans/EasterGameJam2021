@@ -4316,6 +4316,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7376359896434614757, guid: ef179a5b625c63047b1a77dc1a9f4fbf,
+        type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: f0f6dc9e3be7c114a89250922b74965e, type: 2}
     - target: {fileID: 8752573638020234054, guid: ef179a5b625c63047b1a77dc1a9f4fbf,
         type: 3}
       propertyPath: m_Materials.Array.data[4]
@@ -9405,7 +9410,7 @@ Transform:
   m_LocalScale: {x: 3.2997, y: 3.2997, z: 3.2997}
   m_Children: []
   m_Father: {fileID: 301911236}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &837892485
 MeshCollider:
@@ -16379,7 +16384,7 @@ Transform:
   m_LocalScale: {x: 3.2997, y: 3.2997, z: 3.2997}
   m_Children: []
   m_Father: {fileID: 301911236}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1514868755
 MeshCollider:
