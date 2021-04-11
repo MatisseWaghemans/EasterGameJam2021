@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
+using UnityEngine.Events;
 
 public class PlacementManagerScript : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class PlacementManagerScript : MonoBehaviour
     private Vector2 axisValues;
     private Vector2 rotationAxisValues;
     private Material _startMaterial;
+
+    public UnityEvent PlacedEvent;
 
     protected void Awake()
     {
@@ -125,5 +128,6 @@ public class PlacementManagerScript : MonoBehaviour
         CurrentObject.GetComponent<MeshRenderer>().material = _startMaterial;
         CurrentObject = null;
         _isHoldingItem = false;
+        FindObjectOfType<LevelManager>().DestroyCursor(this.transform.parent.gameObject);
     }
 }

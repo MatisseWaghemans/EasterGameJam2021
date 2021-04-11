@@ -30,9 +30,6 @@ public class LevelManager : MonoBehaviour
 	[SerializeField]
 	private SplitscreenManager _splitscreenManager;
 
-    [SerializeField] 
-    private PlacementController _placementController;
-
 	[SerializeField]
 	private CameraOverviewBehaviour _cameraOverviewBehaviour;
 
@@ -53,12 +50,15 @@ public class LevelManager : MonoBehaviour
 	public List<PlayerController> FinishedPlayers = new List<PlayerController>();
 
 
+
 	//public ILevelStates.LevelState LevelState { get; set; }
 
 	private void Start()
 	{
 		_activePlayerControllers = new List<PlayerController>();
 		_gameManager = FindObjectOfType<GameManager>();
+
+		_playerObjList = new List<GameObject>();
 
         //LevelState = ILevelStates.LevelState.Overview;
 
@@ -111,6 +111,13 @@ public class LevelManager : MonoBehaviour
 		FinishedPlayers.Clear();
 		Debug.Log("All players finished");
 		_fireworksParticle.Play();
+
+        for (int i = 0; i < _activePlayerControllers.Count; i++)
+        {
+			GolfBallBehaviour gbb = _activePlayerControllers[i].GetComponentInChildren<GolfBallBehaviour>();
+			_gameManager.TotalPlayerScores[i] += gbb.CurrentLevelScore;
+        }
+
 		StartCoroutine(LoadScene());
 		
 	}
@@ -148,13 +155,28 @@ public class LevelManager : MonoBehaviour
     {
         for (int i = 0; i < activePlayerControllers.Count; i++)
         {
-            GameObject player = Instantiate(_cursorPrefab, _cursorStartTransforms[i].position, _cursorStartTransforms[i].rotation);
-            PlayerController playerController = player.GetComponent<PlayerController>();
+			//GameObject player = Instantiate(_cursorPrefab, _cursorStartTransforms[i].position, _cursorStartTransforms[i].rotation);
+			//PlayerController playerController = player.GetComponent<PlayerController>();
 
-            playerController.SetupPlayer(i, _gameManager.Materials[i]);
-            _playerObjList.Add(player);
-            playerController.playerInput.SwitchCurrentActionMap("Placement Controls");
+			//  playerController.SetupPlayer(i, _gameManager.Materials[i]);
 
+			var playerInput = PlayerInput.Instantiate(_cursorPrefab, controlScheme:"Gamepad", pairWithDevice:_gameManager.UsedGamepads[i]);
+			GameObject playerObject = playerInput.gameObject;
+
+			playerObject.transform.position = _cursorStartTransforms[i].position;
+			playerObject.transform.rotation = _cursorStartTransforms[i].rotation;
+
+			_playerObjList.Add(playerObject);
+        }
+    }
+	public void DestroyCursor(GameObject parent)
+    {
+		_playerObjList.Remove(parent);
+		Destroy(parent);
+
+		if(_playerObjList.Count == 0)
+        {
+			PlayLevel();
         }
     }
 

@@ -39,9 +39,13 @@ public class GameManager : MonoBehaviour
 	public List<PlayerController> ActivePlayerControllers { get => _activePlayerControllers; }
 	private List<Gamepad> _usedGamepads;
 
+    public List<Gamepad> UsedGamepads { get => _usedGamepads;}
+
     private bool _canStart = false;
 
     private List<GameObject> _texts = new List<GameObject>();
+
+    public int[] TotalPlayerScores;
 
 
 
@@ -180,6 +184,8 @@ public class GameManager : MonoBehaviour
 
             uiManager.StartGame.SetActive(true);
             _canStart = true;
+
+            
         }
 	}
 
@@ -219,6 +225,7 @@ public class GameManager : MonoBehaviour
                 uiManager.StartGame.SetActive(false);
                 Debug.Log("Load game scene");
                 SceneManager.LoadScene("Level01");
+                TotalPlayerScores = new int[ActivePlayerControllers.Count];
             }
         }
     }

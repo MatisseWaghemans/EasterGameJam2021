@@ -43,9 +43,6 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
     private MeshRenderer _meshRenderer;
 
-	[SerializeField]
-	private PlacementController _placementController;
-
 	//This is called from the GameManager; when the game is being setup.
 	public void SetupPlayer(int newControllerID, Material material)
     {
@@ -65,13 +62,6 @@ public class PlayerController : MonoBehaviour
 	//This is called from PlayerInput; when a joystick or arrow keys has been pushed.
 	//It stores the input Vector as a Vector3 to then be used by the smoothing function.
 
-	public void OnSelectNextObject(InputAction.CallbackContext value)
-	{
-			PlacementController.Instance.HandleNewObjectHotkey();
-	}
-
-
-
     //This is called from PlayerInput, when a button has been pushed, that corresponds with the 'Attack' action
     public void OnAttack(InputAction.CallbackContext value)
     {
@@ -81,15 +71,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-	//This is called from PlayerInput, when a button has been pushed, that corresponds with the 'Attack' action
-	public void PlaceObstacle(InputAction.CallbackContext value)
-	{
-		if (value.started)
-		{
-			Debug.Log("Place");
-			PlacementController.Instance.ReleaseObject();
-		}
-	}
+
 
 	//This is called from Player Input, when a button has been pushed, that correspons with the 'TogglePause' action
 	public void OnTogglePause(InputAction.CallbackContext value)
