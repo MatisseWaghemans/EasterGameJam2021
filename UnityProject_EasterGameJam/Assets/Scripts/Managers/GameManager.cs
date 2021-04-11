@@ -31,10 +31,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private Material[] _materials;
+	public Material[] Materials { get => _materials; }
 
-    private int _playerId = 0;
+	private int _playerId = 0;
     private List<PlayerController> _activePlayerControllers;
-    private List<Gamepad> _usedGamepads;
+	public List<PlayerController> ActivePlayerControllers { get => _activePlayerControllers; }
+	private List<Gamepad> _usedGamepads;
 
 	private PlayerStates _currentPlayerState;
 	private PlayerStates _perviousPlayerState;
@@ -52,7 +54,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(Instance);
+            Instance = this;
         }
     }
     void Start()
@@ -145,6 +148,10 @@ public class GameManager : MonoBehaviour
 
 	public void TryActivateStart()
 	{
+        Scene scene = SceneManager.GetActiveScene();
+		if (scene.name != "SelectionScreen")
+            return;
+
 		if (_activePlayerControllers.Count > 1)
 		{
             UIManager uiManager = this.GetComponentInChildren<UIManager>();

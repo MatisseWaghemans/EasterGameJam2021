@@ -2,53 +2,32 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SplitscreenManager : MonoBehaviour
 {
-    [SerializeField] private int _amountOfPlayers = 4;
     [SerializeField] private Camera _cameraPrefab;
     private Camera[] _cameras;
-    private GameObject[] _players;
 
-    enum CameraState
+    public void InitCameras(List<PlayerController> players, Transform[] startTransforms, bool autoEnable = false)
     {
-        Overview,
-        TopDown,
-        SplitScreen
-    };
-
-    void Start()
-    {
-        SetPlayerAmount();
-        InitCameras();
-        SetCameraPositions();
-    }
-
-    void InitCameras()
-    {
-        _cameras = new Camera[_amountOfPlayers];
-        _players = new GameObject[_amountOfPlayers];
+        _cameras = new Camera[players.Count];
 
         for (int i = 0; i < _cameras.Length; i++)
         {
-            //TODO fix transform.position for each player
-            _cameras[i] = Instantiate(_cameraPrefab, transform.position, Quaternion.identity);
+            //TODO fix offset & camera prefab from CameraBehaviour
+            _cameras[i] = Instantiate(_cameraPrefab, startTransforms[i].position, startTransforms[i].rotation);
+            _cameras[i].enabled = autoEnable;
         }
+
+        SetCameraPositions();
     }
 
-    void SetPlayerAmount()
+    public void EnableCameras(bool enabled)
     {
-        switch (_amountOfPlayers)
+        for (int i = 0; i < _cameras.Length; i++)
         {
-            case 2:
-                _cameras = new Camera[2];
-                break;
-            case 3:
-                _cameras = new Camera[3];
-                break;
-            case 4:
-                _cameras = new Camera[4];
-                break;
+            _cameras[i].enabled = enabled;
         }
     }
 

@@ -447,7 +447,7 @@ MonoBehaviour:
     m_ActionName: Placement Controls/SelectNextObstacle[/XInputControllerWindows/rightTrigger,/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: Placement Controls
+  m_DefaultActionMap: 0914fb5b-51f6-4b26-9ed7-a3e72d065118
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &16277596
