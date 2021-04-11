@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7174070583321970087}
   - component: {fileID: 2814629599035320097}
   - component: {fileID: 2882906312180043230}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ControllerPointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

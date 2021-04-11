@@ -235,11 +235,14 @@ MonoBehaviour:
   - {fileID: 3694635320876712958}
   - {fileID: 3694635319718711635}
   - {fileID: 3694635319841707886}
+  _cursorStartTransforms: []
   _spectateTransform: {fileID: 3694635321135217988}
   _splitscreenManager: {fileID: 0}
-  _placementController: {fileID: 0}
   _cameraOverviewBehaviour: {fileID: 0}
   _nextSceneName: Level02
+  _fireworksParticle: {fileID: 915982862132318415, guid: 84899659458b11543a9224e3db269f6e,
+    type: 3}
+  _cursorPrefab: {fileID: 0}
   FinishedPlayers: []
 --- !u!81 &3694635321263193492
 AudioListener:

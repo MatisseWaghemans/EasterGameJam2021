@@ -26,6 +26,8 @@ public class PlacementManagerScript : MonoBehaviour
     private Vector2 rotationAxisValues;
     private Material _startMaterial;
 
+    public LayerMask PlaceableFloor;
+
     public UnityEvent PlacedEvent;
 
     protected void Awake()
@@ -58,20 +60,27 @@ public class PlacementManagerScript : MonoBehaviour
 
     private void CheckPlacement()
     {
-        Ray ray = new Ray( ControllerPointer.transform.position, Vector3.down);
+        Ray ray = new Ray(CurrentObject.transform.position, Vector3.down);
 
         if(Physics.Raycast(ray, out var hit, 100f))
         {
             if(hit.transform.gameObject.layer == 12)
             {
+
+                 Debug.Log(hit.transform.name);
                 CurrentObject.GetComponent<MeshRenderer>().material = matGreen;
                 _placeable = true;
             }
+            else
+            {
+                Debug.Log(hit.transform.gameObject.layer);
+            CurrentObject.GetComponent<MeshRenderer>().material = matRed;
+            _placeable = false;
+            }
+           
         }
         else
         {
-            CurrentObject.GetComponent<MeshRenderer>().material = matRed;
-            _placeable = false;
         }
     }
 
@@ -116,7 +125,7 @@ public class PlacementManagerScript : MonoBehaviour
     {
         trans.parent = ControllerPointer.transform;
         CurrentObject = trans.gameObject;
-        trans.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        CurrentObject.layer = 2;
         _isHoldingItem = true;
         _startMaterial = CurrentObject.GetComponent<MeshRenderer>().material;
     }
