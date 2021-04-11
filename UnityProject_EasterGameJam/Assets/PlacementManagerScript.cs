@@ -10,80 +10,82 @@ public class PlacementManagerScript : MonoBehaviour
 
     public GameObject ControllerPointer;
 
-    public List<GolfBallBehaviour> GolfBallBehaviours = new List<GolfBallBehaviour>();
-
     public bool _isHoldingItem;
     public bool _placeable;
 
-    public LayerMask PickUpObjectLayer;
-
-    public LevelManager LevelManager;
-
     public GameObject CurrentObject;
 
-    public float TranslateSpeed;
+    public float TranslateSpeed = 0.2f;
+    public float RotationSpeed = 0.75f;
 
-    public float RotationSpeed;
+    public Material matGreen;
+    public Material matRed;
 
+    private Vector2 axisValues;
+    private Vector2 rotationAxisValues;
+    private Material _startMaterial;
 
     protected void Awake()
     {
         Instance = this;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         ControllerPointer = this.gameObject;
-
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        ControllerPointer.transform.Translate(new Vector3(axisValues.x, 0, axisValues.y) * TranslateSpeed);
 
-        CheckPlacement();
-        
+        if (_isHoldingItem)
+        {
+            if (rotationAxisValues != Vector2.zero && ControllerPointer.transform.GetChild(0) != null)
+            {
+                ControllerPointer.transform.GetChild(0).Rotate(Vector3.forward, rotationAxisValues.x * RotationSpeed, Space.Self);
+            }
+        }
+
+        if (CurrentObject != null)
+        {
+            CheckPlacement();
+        }
     }
 
     private void CheckPlacement()
     {
-       Ray ray = new Ray( ControllerPointer.transform.position, Vector3.down);
-        RaycastHit hit;
+        Ray ray = new Ray( ControllerPointer.transform.position, Vector3.down);
 
-        if(Physics.Raycast(ray, out hit, 100f))
+        if(Physics.Raycast(ray, out var hit, 100f))
         {
             if(hit.transform.gameObject.layer == 12)
             {
-                //groene overlay
+                CurrentObject.GetComponent<MeshRenderer>().material = matGreen;
                 _placeable = true;
             }
-            else
-            {
-                //rode overlay en niet placeable
-                _placeable = false;
-
-            }
+        }
+        else
+        {
+            CurrentObject.GetComponent<MeshRenderer>().material = matRed;
+            _placeable = false;
         }
     }
 
     public void Movement(CallbackContext value)
-    {
-        var axisValues = value.ReadValue<Vector2>();
-        if (axisValues != Vector2.zero)
-        {
-            ControllerPointer.transform.Translate(new Vector3(axisValues.x, 0, axisValues.y) * TranslateSpeed) ;
-        }
+    { 
+        axisValues = value.ReadValue<Vector2>();
     }
+    public void Rotate(CallbackContext value)
+    {
+        rotationAxisValues = value.ReadValue<Vector2>();
+    }
+
     public void Interact(CallbackContext value)
     {
         if (value.started)
         {
-            Transform currentTransform;
-
             Ray ray = new Ray(ControllerPointer.transform.position, Vector3.down);
-
 
             if (!_isHoldingItem)
             {
@@ -91,8 +93,7 @@ public class PlacementManagerScript : MonoBehaviour
                 {
                     if (hit.transform.gameObject.layer == 13)
                     {
-
-                        currentTransform = hit.transform;
+                        var currentTransform = hit.transform;
                         PickUpObject(currentTransform);
                     }
                 }
@@ -101,7 +102,6 @@ public class PlacementManagerScript : MonoBehaviour
             {
                 if (Physics.Raycast(ray, out var hit, 100f))
                 {
-
                     PlaceObject(hit);
                     _placeable = false;
                 }
@@ -116,53 +116,15 @@ public class PlacementManagerScript : MonoBehaviour
         CurrentObject = trans.gameObject;
         trans.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
         _isHoldingItem = true;
-        
+        _startMaterial = CurrentObject.GetComponent<MeshRenderer>().material;
     }
     public void PlaceObject(RaycastHit hit)
     {
-       CurrentObject.transform.parent = null;
+        CurrentObject.transform.parent = null;
         CurrentObject.transform.position = new Vector3(CurrentObject.transform.position.x, hit.point.y, CurrentObject.transform.position.z);
-       CurrentObject.transform.gameObject.isStatic = true;
+        CurrentObject.transform.gameObject.isStatic = true;
+        CurrentObject.GetComponent<MeshRenderer>().material = _startMaterial;
+        CurrentObject = null;
         _isHoldingItem = false;
-
-        //GolfBallBehaviours[controllerID].enabled = false;
-
-    }
-    public void Rotate(CallbackContext value)
-    {
-        var axisValues = value.ReadValue<Vector2>();
-        if (_isHoldingItem)
-        {
-
-             if (axisValues != Vector2.zero && ControllerPointer.transform.GetChild(0) != null)
-             {
-                 ControllerPointer.transform.GetChild(0).Rotate(Vector3.forward, axisValues.x * RotationSpeed, Space.Self);
-             }
-        }
-    }
-
-    public void CheckFinishedPlacement()
-    {
-        GolfBallBehaviour[] allPlayers = FindObjectsOfType<GolfBallBehaviour>();
-
-        bool allFinished = true;
-        foreach (var item in allPlayers)
-        {
-            if (item.enabled)
-            {
-                allFinished = false;
-                return;
-            }
-        }
-
-        if (allFinished)
-        {
-            foreach (var item in allPlayers)
-            {
-
-                item.enabled = true;
-                item.CurrentPlayerState = PlayerStates.Shooting;
-            }
-        }
     }
 }
