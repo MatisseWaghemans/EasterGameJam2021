@@ -147,6 +147,9 @@ MonoBehaviour:
   RotationSpeed: 0.3
   matGreen: {fileID: 0}
   matRed: {fileID: 0}
+  PlaceableFloor:
+    serializedVersion: 2
+    m_Bits: 0
   PlacedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -458,35 +461,11 @@ MonoBehaviour:
     m_ActionId: 10fecf58-9483-40e0-ae20-15c8d01a4288
     m_ActionName: Player Controls/Attack[/DualShock4GamepadHID/buttonSouth,/XInputControllerWindows/buttonSouth,/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1743518200311987065}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnTogglePause
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: a70a208e-b491-4921-b460-a0144030ef2a
     m_ActionName: Player Controls/TogglePause[/Keyboard/p,/DualShock4GamepadHID/start,/XInputControllerWindows/start]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1743518200311987065}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnTogglePause
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: e773b1f9-ce5b-4fa2-9c1f-d194202c43b7
     m_ActionName: Menu Controls/TogglePause[/Keyboard/p,/DualShock4GamepadHID/start,/XInputControllerWindows/start]
   - m_PersistentCalls:
