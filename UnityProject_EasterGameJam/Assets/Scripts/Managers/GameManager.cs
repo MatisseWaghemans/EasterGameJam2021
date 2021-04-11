@@ -87,13 +87,8 @@ public class GameManager : MonoBehaviour
             {
                 _texts[i].SetActive(true);
             }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log($"found gamepad: {Gamepad.all[i].name}");
-            }
             if (Gamepad.all[i].buttonEast.isPressed)
             {
-                Debug.Log($"pressed gamepad: {Gamepad.all[i].name}");
                 if (_usedGamepads.Contains(Gamepad.all[i]))
                     return;
                 else
@@ -105,39 +100,38 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public void DisconnectGamepads()
-    {
-        for (int i = 0; i < Gamepad.all.Count; i++)
-        {
-            if (Gamepad.all[i].buttonWest.isPressed)
-            {
-                Debug.Log($"pressed gamepad: {Gamepad.all[i].name}");
-                if (_usedGamepads.Contains(Gamepad.all[i]))
-                {
-                    DespawnPlayer(i);
-                    _usedGamepads.Remove(Gamepad.all[i]);
-                }
-            }
-        }
-    }
+    //public void DisconnectGamepads()
+    //{
+    //    for (int i = 0; i < Gamepad.all.Count; i++)
+    //    {
+    //        if (Gamepad.all[i].buttonWest.isPressed)
+    //        {
+    //            if (_usedGamepads.Contains(Gamepad.all[i]))
+    //            {
+    //                DespawnPlayer(i);
+    //                _usedGamepads.Remove(Gamepad.all[i]);
+    //            }
+    //        }
+    //    }
+    //}
 
-    private void DespawnPlayer(int id)
-    {
-        for(int i = 0; i<_activePlayerControllers.Count;i++)
-        {
-            if(_activePlayerControllers[i].ControllerID==id)
-            {
-                Destroy(_activePlayerControllers[i].gameObject);
-                _activePlayerControllers.Remove(_activePlayerControllers[i]);
-                _playerId--;
+    //private void DespawnPlayer(int id)
+    //{
+    //    for(int i = 0; i<_activePlayerControllers.Count;i++)
+    //    {
+    //        if(_activePlayerControllers[i].ControllerID==id)
+    //        {
+    //            Destroy(_activePlayerControllers[i].gameObject);
+    //            _activePlayerControllers.Remove(_activePlayerControllers[i]);
+    //            _playerId--;
 
-                var text = spawns[_playerId].GetComponentInChildren<TMPro.TMP_Text>();
-                var image = spawns[_playerId].GetComponentInChildren<SpriteRenderer>();
-                text.text = "Press        To Join";
-                image.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            }
-        }
-    }
+    //            var text = spawns[_playerId].GetComponentInChildren<TMPro.TMP_Text>();
+    //            var image = spawns[_playerId].GetComponentInChildren<SpriteRenderer>();
+    //            text.text = "Press        To Join";
+    //            image.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    //        }
+    //    }
+    //}
 
     public bool CanConnect()
     {

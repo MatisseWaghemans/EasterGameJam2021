@@ -17,9 +17,9 @@ public class ConnectManager : MonoBehaviour
 			_gameManager.ConnectGamepads();
 		}
 
-        if (_gameManager.CanDisconnect())
-        {
-            _gameManager.DisconnectGamepads();
-        }
+        //if (_gameManager.CanDisconnect())
+        //{
+        //    _gameManager.DisconnectGamepads();
+        //}
 	}
 }
