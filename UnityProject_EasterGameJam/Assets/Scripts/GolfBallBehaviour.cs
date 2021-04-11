@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class GolfBallBehaviour : MonoBehaviour
 {
@@ -56,6 +57,7 @@ public class GolfBallBehaviour : MonoBehaviour
 	public Transform ArrowParentTransform;
 
 	public Transform ArrowTransform;
+	public TextMeshProUGUI TextMeshProUGUI;
 
 
 	private void Start()
@@ -210,16 +212,26 @@ public class GolfBallBehaviour : MonoBehaviour
 		_resetShotPosition = this.transform.position;
 		Vector3 flatPlaneVector = new Vector3(shootingForce.x, .05f, shootingForce.z);
 		_rb.AddForce(flatPlaneVector * 10f, ForceMode.Impulse);
-		CurrentLevelScore++;
+		
 		if (CurrentLevelScore == 12)
 		{
 			CurrentPlayerState = PlayerStates.Finished;
 		}
 		_lineRenderer.enabled = false;
 		ArrowTransform.gameObject.SetActive(true);
+
+		UpdateScoreUI();
+
 	}
 
-	private void CheckVelocity(Rigidbody rb)
+    private void UpdateScoreUI()
+    {
+		CurrentLevelScore++;
+		TextMeshProUGUI.text = CurrentLevelScore.ToString();
+
+	}
+
+    private void CheckVelocity(Rigidbody rb)
 	{
 		if (rb.velocity.magnitude <= _velocityThreshhold)
 		{
