@@ -239,14 +239,15 @@ public class GolfBallBehaviour : MonoBehaviour
 		{
 			PlayerFinished();
 		}
-		if (other.gameObject.CompareTag("OutOfBounds"))
-		{
-			this.transform.position = _resetShotPosition;
-			_rb.velocity = Vector3.zero;
-			_rb.constraints = RigidbodyConstraints.FreezeAll;
-			StartCoroutine(ResetForces());
-		}
 	}
+	public void KillPlayer()
+	{
+		this.transform.position = _resetShotPosition;
+		_rb.velocity = Vector3.zero;
+		_rb.constraints = RigidbodyConstraints.FreezeAll;
+		StartCoroutine(ResetForces());
+	}
+
 	private void PlayerFinished()
 	{
 		//#######################################################
