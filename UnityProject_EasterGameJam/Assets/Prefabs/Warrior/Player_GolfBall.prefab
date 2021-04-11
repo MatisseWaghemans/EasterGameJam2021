@@ -338,6 +338,7 @@ MonoBehaviour:
   playerMovementBehaviour: {fileID: 0}
   playerAnimationBehaviour: {fileID: 0}
   playerVisualsBehaviour: {fileID: 16277596}
+  PlayerGolfBallBehaviour: {fileID: 8241443260326758885}
   playerInput: {fileID: 1743518200311987064}
   movementSmoothingSpeed: 5
   IsDisconnected: 0

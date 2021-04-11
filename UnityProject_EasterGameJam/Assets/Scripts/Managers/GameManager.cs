@@ -39,14 +39,13 @@ public class GameManager : MonoBehaviour
 	public List<PlayerController> ActivePlayerControllers { get => _activePlayerControllers; }
 	private List<Gamepad> _usedGamepads;
 
-	private PlayerStates _currentPlayerState;
-	private PlayerStates _perviousPlayerState;
-
     private bool _canStart = false;
 
     private List<GameObject> _texts = new List<GameObject>();
 
-    public static GameManager Instance;
+
+
+	public static GameManager Instance;
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -74,6 +73,7 @@ public class GameManager : MonoBehaviour
 
         SetupUI();
     }
+
 
     public void ConnectGamepads()
     {

@@ -14,6 +14,8 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	[SerializeField] private float _velocityThreshhold = 0.05f;
 
+	private LevelManager _levelManager;
+
 
 
 	private LineRenderer _lineRenderer;
@@ -28,19 +30,7 @@ public class GolfBallBehaviour : MonoBehaviour
 	private Vector3 _resetShotPosition = Vector3.zero;
 
 
-	public PlayerStates CurrentPlayerState
-	{
-		get { return _currentPlayerState; }
-		set
-		{
-			//_cameraBehaviour.StateChanged = true;
-			_currentPlayerState = value;
-		}
-	}
-
-	private PlayerStates _currentPlayerState;
-
-	private PlayerStates _previousPlayerState;
+	public PlayerStates CurrentPlayerState { get; set; }
 
 	private float _controllerStickValue;
 
@@ -64,7 +54,6 @@ public class GolfBallBehaviour : MonoBehaviour
 	{
 		_cameraBehaviour = _cameraPivot.GetComponent<CameraBehaviour>();
 		CurrentPlayerState = PlayerStates.Shooting;
-		_previousPlayerState = CurrentPlayerState;
 		_rb = this.transform.GetComponent<Rigidbody>();
 		_lineRenderer = _cameraPivot.GetComponent<LineRenderer>();
 	}
@@ -249,7 +238,9 @@ public class GolfBallBehaviour : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Finish"))
 		{
+			_levelManager = GameObject.FindObjectOfType<LevelManager>();
 			PlayerFinished();
+			_levelManager.CheckPlayersFinished();
 		}
 	}
 	public void KillPlayer()

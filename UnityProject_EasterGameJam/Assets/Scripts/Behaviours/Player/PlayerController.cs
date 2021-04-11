@@ -16,7 +16,10 @@ public class PlayerController : MonoBehaviour
     public PlayerAnimationBehaviour playerAnimationBehaviour;
     public PlayerVisualsBehaviour playerVisualsBehaviour;
 
-    [Header("Input Settings")]
+	public GolfBallBehaviour PlayerGolfBallBehaviour;
+
+
+	[Header("Input Settings")]
     public PlayerInput playerInput;
     public float movementSmoothingSpeed = 1f;
     private Vector3 rawInputMovement;

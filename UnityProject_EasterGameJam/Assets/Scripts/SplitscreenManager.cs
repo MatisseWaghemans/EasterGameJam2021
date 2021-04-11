@@ -17,7 +17,7 @@ public class SplitscreenManager : MonoBehaviour
 
     public void InitCameras(List<PlayerController> players, Transform[] startTransforms, bool autoEnable = false)
     {
-        _levelManager.LevelState = ILevelStates.LevelState.SplitScreen;
+        //_levelManager.LevelState = ILevelStates.LevelState.SplitScreen;
         _cameras = new Camera[players.Count];
 
         for (int i = 0; i < _cameras.Length; i++)
