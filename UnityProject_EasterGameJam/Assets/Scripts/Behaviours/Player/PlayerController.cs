@@ -71,7 +71,19 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 inputMovement = value.ReadValue<Vector2>();
         rawInputMovement = new Vector3(inputMovement.x, 0, inputMovement.y);
+
+        PlacementManagerScript.Instance.Movement(inputMovement);
     }
+    public void OnInteract(InputAction.CallbackContext value)
+    {
+        PlacementManagerScript.Instance.Interact();
+    }
+    public void OnRotate(InputAction.CallbackContext value)
+    {
+
+        PlacementManagerScript.Instance.Rotate(value.ReadValue<Vector2>());
+    }
+
 
     //This is called from PlayerInput, when a button has been pushed, that corresponds with the 'Attack' action
     public void OnAttack(InputAction.CallbackContext value)
