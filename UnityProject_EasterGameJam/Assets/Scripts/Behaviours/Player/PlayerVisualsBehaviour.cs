@@ -43,7 +43,7 @@ public class PlayerVisualsBehaviour : MonoBehaviour
         string deviceName = "Player " + controllerID;
         playerUIDisplayBehaviour.UpdatePlayerDeviceNameDisplayText(deviceName);
 
-        Color deviceColor = deviceDisplaySettings.GetDeviceColor(playerInput);
+        Color deviceColor = _material.color;
         playerUIDisplayBehaviour.UpdatePlayerIconDisplayColor(deviceColor);
     }
 
