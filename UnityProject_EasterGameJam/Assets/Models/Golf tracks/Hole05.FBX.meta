@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e1d0594c4b9f831479c0953439b7e103
+guid: e51907df564524c468e8fcfb9787539a
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Course
-    second: {fileID: 2100000, guid: 2aa3767f85afeef4399bdda7e885d3c5, type: 2}
+    second: {fileID: 2100000, guid: 3b06a7e8c3c325c4290162a1017a444d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Course dark
-    second: {fileID: 2100000, guid: 7c4c1e1d35f1aac438d6e24f5e9fb1da, type: 2}
+    second: {fileID: 2100000, guid: f0f6dc9e3be7c114a89250922b74965e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

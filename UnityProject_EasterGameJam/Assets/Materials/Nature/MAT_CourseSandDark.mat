@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_DarkSand
+  m_Name: MAT_CourseSandDark
   m_Shader: {fileID: -6465566751694194690, guid: 948959b4d88a1444eb3cad8e97335d38,
     type: 3}
   m_ShaderKeywords: 
@@ -123,7 +123,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_282E788E: {r: 0.589, g: 0.4613833, b: 0.29122776, a: 1}
+    - Color_282E788E: {r: 0.574, g: 0.3762889, b: 0.16901112, a: 1}
     - _BaseColor: {r: 0.97647065, g: 0.74509805, b: 0.4431373, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
