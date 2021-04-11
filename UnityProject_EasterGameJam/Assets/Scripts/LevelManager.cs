@@ -5,6 +5,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
+public interface ILevelStates
+{
+    enum LevelState
+    {
+        Overview,
+        Placement,
+        SplitScreen
+    };
+}
+
 public class LevelManager : MonoBehaviour
 {
 	[SerializeField]
@@ -22,43 +32,39 @@ public class LevelManager : MonoBehaviour
 	private GameManager _gameManager;
 	private List<PlayerController> _activePlayerControllers;
 
-    enum LevelState
-    {
-        Overview,
-        Placement,
-        SplitScreen
-    };
-
-    private LevelState _levelState;
+    public ILevelStates.LevelState LevelState { get; set; }
 
 	private void Start()
 	{
 		_activePlayerControllers = new List<PlayerController>();
 		_gameManager = FindObjectOfType<GameManager>();
-		
-        _levelState = LevelState.Overview;
 
-		switch (_levelState)
-        {
-			case LevelState.Overview:
+        LevelState = ILevelStates.LevelState.Overview;
 
-                break;
-            case LevelState.Placement:
-
-                break;
-            case LevelState.SplitScreen:
-
-                break;
-		}
-
-		_cameraOverviewBehaviour.StartOverview();
-		_cameraOverviewBehaviour.Event.AddListener(StartLevel);
+        _cameraOverviewBehaviour.StartOverview();
+        _cameraOverviewBehaviour.Event.AddListener(StartLevel);
 
 		//instantiate balls
 		PlaceActivePlayers(_gameManager.ActivePlayerControllers);
 
 		//disable controls
 		DisableInput();
+	}
+
+    void Update()
+    {
+        switch (LevelState)
+        {
+            case ILevelStates.LevelState.Overview:
+				//Debug.Log("Overview mode");
+                break;
+            case ILevelStates.LevelState.Placement:
+				Debug.Log("Placement Mode");
+                break;
+            case ILevelStates.LevelState.SplitScreen:
+				Debug.Log("Splitscreen mode");
+                break;
+        }
 	}
 
 	private void PlaceActivePlayers(List<PlayerController> activePlayerControllers)
