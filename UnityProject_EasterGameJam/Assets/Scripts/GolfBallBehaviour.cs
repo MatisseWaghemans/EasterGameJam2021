@@ -9,6 +9,12 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	[SerializeField] private Transform _cameraPivot;
 
+	[SerializeField] private Renderer _arrowRenderer;
+
+	[SerializeField] private float _velocityThreshhold = 0.05f;
+
+
+
 	private LineRenderer _lineRenderer;
 
 	[SerializeField] private float _aimSpeedDirection;
@@ -47,7 +53,10 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	public int CurrentLevelScore = 0;
 
+	public Transform ArrowParentTransform;
+
 	public Transform ArrowTransform;
+
 
 	private void Start()
 	{
@@ -108,6 +117,7 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	private void UpdatePlayerShootingControls()
 	{
+		UpdateGolfballRendererActive();
 		//joystick direction 
 
 		Vector3 forward = _cameraPivot.forward;
@@ -124,22 +134,29 @@ public class GolfBallBehaviour : MonoBehaviour
 			_aimDirection.Normalize();
 		}
 
-		if (_gamepad.leftStick.ReadValue() != Vector2.zero && _rb.velocity == Vector3.zero)
+		if (_gamepad.leftStick.ReadValue() != Vector2.zero && _rb.velocity.magnitude <= _velocityThreshhold)
 		{
 			// Debug.DrawLine(this.transform.position, this.transform.position + _aimDirection * _aimSpeedDirection);
-			_lineRenderer.SetPosition(0, this.transform.position);
-			_lineRenderer.SetPosition(1, this.transform.position + _aimDirection * _aimSpeedDirection / 2);
+			//_lineRenderer.SetPosition(0, this.transform.position);
+			//_lineRenderer.SetPosition(1, this.transform.position + _aimDirection * _aimSpeedDirection / 2);
 			//Debug.Log(_aimDirection);
 
 			//arrow scaling
-			float scale = Mathf.Clamp01(Mathf.Sqrt(Mathf.Pow(_aimDirection.x * _aimSpeedDirection, 2) * Mathf.Pow(_aimDirection.z * _aimSpeedDirection, 2))) * 5;
-			scale = Mathf.Clamp(scale, 1, 5);
-			ArrowTransform.localScale = new Vector3(scale, 1/scale, .5f/scale);
+			float scale = ((this.transform.position + _aimDirection * _aimSpeedDirection / 2) - (this.transform.position)).magnitude * 5;
+			//float scale = Mathf.Clamp01(Mathf.Sqrt(Mathf.Pow(_aimDirection.x * _aimSpeedDirection, 2) * Mathf.Pow(_aimDirection.z * _aimSpeedDirection, 2))) * 5;
+			scale = Mathf.Clamp(scale, 0, 5);
+			//ArrowTransform.localScale = new Vector3(scale, 1/scale, .5f/scale);
+			ArrowTransform.localScale = new Vector3(scale, ArrowTransform.localScale.y, ArrowTransform.localScale.z);
 
 			//arrow rotation
-			ArrowTransform.localPosition = Vector3.zero;
-			ArrowTransform.localRotation = Quaternion.Euler(-90 + _aimDirection.x * 360, 0, _aimDirection.y * 360 + 90);
-			ArrowTransform.localPosition = Vector3.forward * .25f;
+			//ArrowTransform.localPosition = Vector3.zero;
+			//ArrowTransform.localRotation = Quaternion.Euler(-90 + _aimDirection.x * 360, 0, _aimDirection.y * 360 + 90);
+			ArrowParentTransform.LookAt(this.transform.position + _aimDirection * _aimSpeedDirection / 2);
+			//ArrowTransform.localPosition = Vector3.forward * .25f;
+		}
+		else if(_gamepad.leftStick.ReadValue() == Vector2.zero)
+		{
+			ArrowTransform.localScale = new Vector3(0, ArrowTransform.localScale.y, ArrowTransform.localScale.z);
 		}
 
 
@@ -148,7 +165,7 @@ public class GolfBallBehaviour : MonoBehaviour
 
 		#region Shoot
 
-		if (_gamepad.buttonSouth.wasPressedThisFrame && _rb.velocity == Vector3.zero && _gamepad.leftStick.ReadValue() != Vector2.zero && CurrentPlayerState != PlayerStates.Finished)
+		if (_gamepad.buttonSouth.wasPressedThisFrame && _rb.velocity.magnitude <= _velocityThreshhold && _gamepad.leftStick.ReadValue() != Vector2.zero && CurrentPlayerState != PlayerStates.Finished)
 		{
 			ShootGolfBall(_controllerStickVector * _aimSpeedDirection);
 		}
@@ -177,6 +194,18 @@ public class GolfBallBehaviour : MonoBehaviour
 		CheckVelocity(_rb);
 	}
 
+	private void UpdateGolfballRendererActive()
+	{
+		if (ArrowTransform.localScale.x <= 0.05f)
+		{
+			_arrowRenderer.enabled = false;
+		}
+		else
+		{
+			_arrowRenderer.enabled = true;
+		}
+	}
+
 	private void ShootGolfBall(Vector3 shootingForce)
 	{
 
@@ -195,7 +224,7 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	private void CheckVelocity(Rigidbody rb)
 	{
-		if (rb.velocity == Vector3.zero)
+		if (rb.velocity.magnitude <= _velocityThreshhold)
 		{
 			_lineRenderer.enabled = true;
 			ArrowTransform.gameObject.SetActive(true);
@@ -229,7 +258,7 @@ public class GolfBallBehaviour : MonoBehaviour
 		//######################################################
 		CurrentLevelScore = 0;
 		CurrentPlayerState = PlayerStates.Finished;
-		
+
 		_rb.velocity = Vector3.zero;
 
 	}

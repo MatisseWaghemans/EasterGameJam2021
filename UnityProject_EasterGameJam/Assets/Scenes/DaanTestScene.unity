@@ -409,6 +409,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &650595004 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1711813855247684415, guid: 3ef46ee53316091489cbcc20c8b4b0df,
+    type: 3}
+  m_PrefabInstance: {fileID: 2848651067309191451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &731768125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,11 +1099,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3410289457997980917, guid: 3ef46ee53316091489cbcc20c8b4b0df,
-        type: 3}
-      propertyPath: SpectatingPos
-      value: 
-      objectReference: {fileID: 1366826405}
     - target: {fileID: 3967461368794512398, guid: 3ef46ee53316091489cbcc20c8b4b0df,
         type: 3}
       propertyPath: m_Name
@@ -1158,10 +1159,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5076284384642163429, guid: 3ef46ee53316091489cbcc20c8b4b0df,
+    - target: {fileID: 5745842598944010250, guid: 3ef46ee53316091489cbcc20c8b4b0df,
         type: 3}
-      propertyPath: m_CollisionDetection
-      value: 2
+      propertyPath: _arrowRenderer
+      value: 
+      objectReference: {fileID: 650595004}
+    - target: {fileID: 5745842598944010250, guid: 3ef46ee53316091489cbcc20c8b4b0df,
+        type: 3}
+      propertyPath: _velocityThreshhold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ef46ee53316091489cbcc20c8b4b0df, type: 3}
