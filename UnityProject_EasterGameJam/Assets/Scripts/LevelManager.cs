@@ -13,16 +13,43 @@ public class LevelManager : MonoBehaviour
 	[SerializeField]
 	private SplitscreenManager _splitscreenManager;
 
+    [SerializeField] 
+    private PlacementController _placementController;
+
 	[SerializeField]
 	private CameraOverviewBehaviour _cameraOverviewBehaviour;
 
 	private GameManager _gameManager;
 	private List<PlayerController> _activePlayerControllers;
 
+    enum LevelState
+    {
+        Overview,
+        Placement,
+        SplitScreen
+    };
+
+    private LevelState _levelState;
+
 	private void Start()
 	{
 		_activePlayerControllers = new List<PlayerController>();
 		_gameManager = FindObjectOfType<GameManager>();
+
+        _levelState = LevelState.Overview;
+
+		switch (_levelState)
+        {
+			case LevelState.Overview:
+
+                break;
+            case LevelState.Placement:
+
+                break;
+            case LevelState.SplitScreen:
+
+                break;
+		}
 
 		_cameraOverviewBehaviour.StartOverview();
 		_cameraOverviewBehaviour.Event.AddListener(StartLevel);
