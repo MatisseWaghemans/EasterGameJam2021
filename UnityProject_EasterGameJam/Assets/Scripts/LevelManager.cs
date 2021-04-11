@@ -21,6 +21,9 @@ public class LevelManager : MonoBehaviour
 	[SerializeField]
 	private Transform[] _startTransforms;
 
+    [SerializeField]
+    private Transform[] _cursorStartTransforms;
+
 	[SerializeField]
 	private Transform _spectateTransform;
 
@@ -43,6 +46,10 @@ public class LevelManager : MonoBehaviour
 	private List<PlayerController> _activePlayerControllers;
 	public List<PlayerController> PlayerControllers { get => _activePlayerControllers; }
 
+    private List<GameObject> _playerObjList;
+
+    [SerializeField] private GameObject _cursorPrefab;
+
 	public List<PlayerController> FinishedPlayers = new List<PlayerController>();
 
 
@@ -56,29 +63,13 @@ public class LevelManager : MonoBehaviour
         //LevelState = ILevelStates.LevelState.Overview;
 
         _cameraOverviewBehaviour.StartOverview();
-        _cameraOverviewBehaviour.Event.AddListener(StartLevel);
+        _cameraOverviewBehaviour.Event.AddListener(StartPlacement);
 
 		//instantiate balls
 		PlaceActivePlayers(_gameManager.ActivePlayerControllers);
 
 		//disable controls
 		DisableInput();
-	}
-
-    void Update()
-    {
-    //    switch (LevelState)
-    //    {
-    //        case ILevelStates.LevelState.Overview:
-				////Debug.Log("Overview mode");
-    //            break;
-    //        case ILevelStates.LevelState.Placement:
-				//Debug.Log("Placement Mode");
-    //            break;
-    //        case ILevelStates.LevelState.SplitScreen:
-				//Debug.Log("Splitscreen mode");
-    //            break;
-    //    }
 	}
 
 	private void PlaceActivePlayers(List<PlayerController> activePlayerControllers)
@@ -130,22 +121,12 @@ public class LevelManager : MonoBehaviour
 		SceneManager.LoadScene(_nextSceneName);
 	}
 
-	private void StartLevel()
-	{
-		_cameraOverviewBehaviour.Event.RemoveListener(StartLevel);
+    private void StartPlacement()
+    {
+        _cameraOverviewBehaviour.Event.RemoveListener(StartPlacement);
 
-		//LevelState = ILevelStates.LevelState.SplitScreen;
-
-		//show splitscreen
-		_splitscreenManager.InitCameras(_activePlayerControllers, _startTransforms, true);
-
-		//enable controls
-		EnableInput();
-		for (int i = 0; i < _activePlayerControllers.Count; i++)
-		{
-			_activePlayerControllers[i].playerInput.SwitchCurrentActionMap("Player Controls");
-		}
-	}
+        PlacePlayerCursors(_gameManager.ActivePlayerControllers);
+    }
 
 	private void EnableInput()
 	{
@@ -162,4 +143,30 @@ public class LevelManager : MonoBehaviour
 			_activePlayerControllers[i].playerInput.ActivateInput();
 		}
 	}
+
+    private void PlacePlayerCursors(List<PlayerController> activePlayerControllers)
+    {
+        for (int i = 0; i < activePlayerControllers.Count; i++)
+        {
+            GameObject player = Instantiate(_cursorPrefab, _cursorStartTransforms[i].position, _cursorStartTransforms[i].rotation);
+            PlayerController playerController = player.GetComponent<PlayerController>();
+
+            playerController.SetupPlayer(i, _gameManager.Materials[i]);
+            _playerObjList.Add(player);
+            playerController.playerInput.SwitchCurrentActionMap("Placement Controls");
+
+        }
+    }
+
+	private void PlayLevel()
+    {
+        _splitscreenManager.InitCameras(_activePlayerControllers, _startTransforms, true);
+
+        //enable controls
+        EnableInput();
+        for (int i = 0; i < _activePlayerControllers.Count; i++)
+        {
+            _activePlayerControllers[i].playerInput.SwitchCurrentActionMap("Player Controls");
+        }
+    }
 }
