@@ -105,7 +105,6 @@ public class PlacementManagerScript : MonoBehaviour
                     PlaceObject(hit);
                     _placeable = false;
                 }
-
             }
         }
     }
