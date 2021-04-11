@@ -96,7 +96,5 @@ public class CameraOverviewBehaviour : MonoBehaviour
 		Event.Invoke();
 
 		_camera.enabled = false;
-
-        _levelManager.LevelState = ILevelStates.LevelState.Placement;
     }
 }

@@ -68,27 +68,27 @@ public class GolfBallBehaviour : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
-	{
-		switch (CurrentPlayerState)
-		{
-			case PlayerStates.Paused:
-				break;
-			case PlayerStates.Shooting:
-				UpdatePlayerShootingControls();
-				break;
-			case PlayerStates.Spectating:
-				UpdateSpectatingControls();
-				break;
-			case PlayerStates.Placing:
-				break;
-			case PlayerStates.Finished:
-				break;
-			default:
-				break;
-		}
+	//void Update()
+	//{
+	//	switch (CurrentPlayerState)
+	//	{
+	//		case PlayerStates.Paused:
+	//			break;
+	//		case PlayerStates.Shooting:
+	//			UpdatePlayerShootingControls();
+	//			break;
+	//		case PlayerStates.Spectating:
+	//			UpdateSpectatingControls();
+	//			break;
+	//		case PlayerStates.Placing:
+	//			break;
+	//		case PlayerStates.Finished:
+	//			break;
+	//		default:
+	//			break;
+	//	}
 
-	}
+	//}
 
 	private void UpdateSpectatingControls()
 	{
@@ -115,8 +115,10 @@ public class GolfBallBehaviour : MonoBehaviour
 		#endregion
 	}
 
-	private void UpdatePlayerShootingControls()
+	public void OnAim(InputAction.CallbackContext value)
 	{
+		Vector2 inputMovement = value.ReadValue<Vector2>();
+
 		UpdateGolfballRendererActive();
 		//joystick direction 
 
@@ -128,13 +130,13 @@ public class GolfBallBehaviour : MonoBehaviour
 		right.y = 0;
 		right.Normalize();
 
-		_aimDirection = (forward * _gamepad.leftStick.y.ReadValue() + right * _gamepad.leftStick.x.ReadValue());
+		_aimDirection = (forward * inputMovement.y + right * inputMovement.x);
 		if (_aimDirection.magnitude > 1)
 		{
 			_aimDirection.Normalize();
 		}
 
-		if (_gamepad.leftStick.ReadValue() != Vector2.zero && _rb.velocity.magnitude <= _velocityThreshhold)
+		if (inputMovement != Vector2.zero && _rb.velocity.magnitude <= _velocityThreshhold)
 		{
 			// Debug.DrawLine(this.transform.position, this.transform.position + _aimDirection * _aimSpeedDirection);
 			//_lineRenderer.SetPosition(0, this.transform.position);
@@ -154,44 +156,42 @@ public class GolfBallBehaviour : MonoBehaviour
 			ArrowParentTransform.LookAt(this.transform.position + _aimDirection * _aimSpeedDirection / 2);
 			//ArrowTransform.localPosition = Vector3.forward * .25f;
 		}
-		else if(_gamepad.leftStick.ReadValue() == Vector2.zero)
+		else if(inputMovement == Vector2.zero)
 		{
 			ArrowTransform.localScale = new Vector3(0, ArrowTransform.localScale.y, ArrowTransform.localScale.z);
 		}
 
 
-		_controllerStickValue = _gamepad.leftStick.ReadValue().magnitude;
+		_controllerStickValue = inputMovement.magnitude;
 		_controllerStickVector = _aimDirection;
 
-		#region Shoot
+		//#region To Spectate
 
-		if (_gamepad.buttonSouth.wasPressedThisFrame && _rb.velocity.magnitude <= _velocityThreshhold && _gamepad.leftStick.ReadValue() != Vector2.zero && CurrentPlayerState != PlayerStates.Finished)
-		{
-			ShootGolfBall(_controllerStickVector * _aimSpeedDirection);
-		}
-		if (_gamepad.buttonSouth.wasReleasedThisFrame)
-		{
+		//if (_gamepad.buttonNorth.wasPressedThisFrame)
+		//{
+		//	_spectateStateToggled = !_spectateStateToggled;
 
-		}
+		//	if (_spectateStateToggled)
+		//	{
+		//		CurrentPlayerState = PlayerStates.Spectating;
+		//		_cameraBehaviour.SpectatingPos.gameObject.SetActive(true);
+		//	}
+		//}
 
-		#endregion
-
-		#region To Spectate
-
-		if (_gamepad.buttonNorth.wasPressedThisFrame)
-		{
-			_spectateStateToggled = !_spectateStateToggled;
-
-			if (_spectateStateToggled)
-			{
-				CurrentPlayerState = PlayerStates.Spectating;
-				_cameraBehaviour.SpectatingPos.gameObject.SetActive(true);
-			}
-		}
-
-		#endregion
+		//#endregion
 
 		CheckVelocity(_rb);
+	}
+
+	public void OnShoot(InputAction.CallbackContext value)
+	{
+		if (value.started && _controllerStickValue > 0)
+		{
+			if (_rb.velocity.magnitude <= _velocityThreshhold && CurrentPlayerState != PlayerStates.Finished)
+			{
+				ShootGolfBall(_controllerStickVector * _aimSpeedDirection);
+			}
+		}
 	}
 
 	private void UpdateGolfballRendererActive()

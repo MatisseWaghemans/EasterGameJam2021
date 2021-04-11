@@ -53,18 +53,18 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        switch (LevelState)
-        {
-            case ILevelStates.LevelState.Overview:
-				//Debug.Log("Overview mode");
-                break;
-            case ILevelStates.LevelState.Placement:
-				Debug.Log("Placement Mode");
-                break;
-            case ILevelStates.LevelState.SplitScreen:
-				Debug.Log("Splitscreen mode");
-                break;
-        }
+    //    switch (LevelState)
+    //    {
+    //        case ILevelStates.LevelState.Overview:
+				////Debug.Log("Overview mode");
+    //            break;
+    //        case ILevelStates.LevelState.Placement:
+				//Debug.Log("Placement Mode");
+    //            break;
+    //        case ILevelStates.LevelState.SplitScreen:
+				//Debug.Log("Splitscreen mode");
+    //            break;
+    //    }
 	}
 
 	private void PlaceActivePlayers(List<PlayerController> activePlayerControllers)
@@ -82,6 +82,8 @@ public class LevelManager : MonoBehaviour
 	private void StartLevel()
 	{
 		_cameraOverviewBehaviour.Event.RemoveListener(StartLevel);
+
+		LevelState = ILevelStates.LevelState.SplitScreen;
 
 		//show splitscreen
 		_splitscreenManager.InitCameras(_activePlayerControllers, _startTransforms, true);

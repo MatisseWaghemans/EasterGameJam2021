@@ -33,13 +33,11 @@ public class PlayerController : MonoBehaviour
 
     public bool IsDisconnected = false;
 
-    private Material _material;
-
-	[SerializeField]
-	private Rigidbody _controllerPointerRigidbody;
-
-	[SerializeField]
-	private Transform _controllerPointerTransform;
+    [SerializeField]
+    private MeshRenderer _meshRenderer;
+    [SerializeField]
+    private Camera _camera;
+	public Camera Camera { get => _camera; }
 
 	[SerializeField]
 	private PlacementController _placementController;
@@ -50,8 +48,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"tried connecting: {playerInput.currentControlScheme}");
         ControllerID = newControllerID;
 
-        this.GetComponentInChildren<MeshRenderer>().material = material;
-        _material = material;
+        _meshRenderer.material = material;
 
         currentControlScheme = playerInput.currentControlScheme;
 
@@ -66,13 +63,14 @@ public class PlayerController : MonoBehaviour
 
 	public void OnSelectNextObject(InputAction.CallbackContext value)
 	{
-			PlacementController.Instance.HandleNewObjectHotkey();
+		PlacementController.Instance.HandleNewObjectHotkey();
 	}
 
 	public void OnMovement(InputAction.CallbackContext value)
     {
         Vector2 inputMovement = value.ReadValue<Vector2>();
         rawInputMovement = new Vector3(inputMovement.x, 0, inputMovement.y);
+
     }
 
     //This is called from PlayerInput, when a button has been pushed, that corresponds with the 'Attack' action
@@ -80,7 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         if(value.started)
         {
-            playerAnimationBehaviour.PlayAttackAnimation();
+            //playerAnimationBehaviour.PlayAttackAnimation();
         }
     }
 
@@ -165,37 +163,8 @@ public class PlayerController : MonoBehaviour
     //Update Loop - Used for calculating frame-based data
     void Update()
     {
-		CalculateMovementInputSmoothing();
-		UpdateControllerPlacementPointer();
-		//UpdatePlayerMovement();
-		//UpdatePlayerAnimationMovement();
+
 	}
-
-	private void UpdateControllerPlacementPointer()
-	{
-		_controllerPointerRigidbody.MovePosition(_controllerPointerTransform.position + smoothInputMovement);
-	}
-
-	//Input's Axes values are raw
-
-
-	void CalculateMovementInputSmoothing()
-    {
-        
-        smoothInputMovement = Vector3.Lerp(smoothInputMovement, rawInputMovement, Time.deltaTime * movementSmoothingSpeed);
-
-    }
-
-    void UpdatePlayerMovement()
-    {
-        playerMovementBehaviour.UpdateMovementData(smoothInputMovement);
-    }
-
-    void UpdatePlayerAnimationMovement()
-    {
-        playerAnimationBehaviour.UpdateMovementAnimation(smoothInputMovement.magnitude);
-    }
-
 
     public void SetInputActiveState(bool gameIsPaused)
     {

@@ -22,8 +22,8 @@ public class SplitscreenManager : MonoBehaviour
 
         for (int i = 0; i < _cameras.Length; i++)
         {
-            //TODO fix offset & camera prefab from CameraBehaviour
-            _cameras[i] = Instantiate(_cameraPrefab, startTransforms[i].position, startTransforms[i].rotation);
+            _cameras[i] = players[i].Camera;
+            _cameras[i].gameObject.SetActive(true);
             _cameras[i].enabled = autoEnable;
         }
 
