@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlowerObstacle Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: 15e8a588c63da8348a9f300b7f8aca8a,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15e8a588c63da8348a9f300b7f8aca8a, type: 3}
 --- !u!4 &894383440254073268 stripped
