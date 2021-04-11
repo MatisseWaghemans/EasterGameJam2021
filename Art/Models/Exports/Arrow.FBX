@@ -9,10 +9,10 @@ FBXHeaderExtension:  {
 		Year: 2021
 		Month: 4
 		Day: 11
-		Hour: 1
-		Minute: 29
-		Second: 8
-		Millisecond: 454
+		Hour: 4
+		Minute: 10
+		Second: 31
+		Millisecond: 423
 	}
 	Creator: "FBX SDK/FBX Plugins version 2019.2"
 }
@@ -95,7 +95,7 @@ Objects:  {
 			Property: "ScalingMaxX", "bool", "",0
 			Property: "ScalingMaxY", "bool", "",0
 			Property: "ScalingMaxZ", "bool", "",0
-			Property: "GeometricTranslation", "Vector3D", "",0,0,0
+			Property: "GeometricTranslation", "Vector3D", "",-3.0517578125e-05,1.85966491699219e-05,4.29153442382813e-06
 			Property: "GeometricRotation", "Vector3D", "",0,0,0
 			Property: "GeometricScaling", "Vector3D", "",1,1,1
 			Property: "MinDampRangeX", "double", "",0
@@ -120,7 +120,7 @@ Objects:  {
 			Property: "DefaultAttributeIndex", "int", "",0
 			Property: "Freeze", "bool", "",0
 			Property: "LODBox", "bool", "",0
-			Property: "Lcl Translation", "Lcl Translation", "A",-425.027069091797,7.77521324157715,0.982762336730957
+			Property: "Lcl Translation", "Lcl Translation", "A",-425.027038574219,7.77520895004272,0.982780933380127
 			Property: "Lcl Rotation", "Lcl Rotation", "A",0,0,0
 			Property: "Lcl Scaling", "Lcl Scaling", "A",1,1,1
 			Property: "Visibility", "Visibility", "A",1
@@ -218,14 +218,14 @@ Objects:  {
 			Property: "Original|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "Original|ApplicationName", "KString", "", "3ds Max"
 			Property: "Original|ApplicationVersion", "KString", "", "2019"
-			Property: "Original|DateTime_GMT", "DateTime", "", "10/04/2021 23:29:08.454"
+			Property: "Original|DateTime_GMT", "DateTime", "", "11/04/2021 02:10:31.422"
 			Property: "Original|FileName", "KString", "", "C:\Users\Andrés\Desktop\Projects\Games\GameJams\EasterGameJam2021\Art\Models\Exports\Arrow.FBX"
              
 			Property: "LastSaved", "Compound", ""
 			Property: "LastSaved|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "LastSaved|ApplicationName", "KString", "", "3ds Max"
 			Property: "LastSaved|ApplicationVersion", "KString", "", "2019"
-			Property: "LastSaved|DateTime_GMT", "DateTime", "", "10/04/2021 23:29:08.454"
+			Property: "LastSaved|DateTime_GMT", "DateTime", "", "11/04/2021 02:10:31.422"
 			Property: "Original|ApplicationActiveProject", "KString", "", "C:\Users\Andrés\Documents\3dsMax"
 			Property: "Original|ApplicationNativeFile", "KString", "", "C:\Users\Andrés\Desktop\Projects\Games\GameJams\EasterGameJam2021\Art\Models\Golfbaan.max"
              

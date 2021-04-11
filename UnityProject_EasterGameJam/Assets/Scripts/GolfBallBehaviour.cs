@@ -47,6 +47,8 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	public int CurrentLevelScore = 0;
 
+	public Transform ArrowTransform;
+
 	private void Start()
 	{
 		_cameraBehaviour = _cameraPivot.GetComponent<CameraBehaviour>();
@@ -128,6 +130,16 @@ public class GolfBallBehaviour : MonoBehaviour
 			_lineRenderer.SetPosition(0, this.transform.position);
 			_lineRenderer.SetPosition(1, this.transform.position + _aimDirection * _aimSpeedDirection / 2);
 			//Debug.Log(_aimDirection);
+
+			//arrow scaling
+			float scale = Mathf.Clamp01(Mathf.Sqrt(Mathf.Pow(_aimDirection.x * _aimSpeedDirection, 2) * Mathf.Pow(_aimDirection.z * _aimSpeedDirection, 2))) * 5;
+			scale = Mathf.Clamp(scale, 1, 5);
+			ArrowTransform.localScale = new Vector3(scale, 1/scale, .5f/scale);
+
+			//arrow rotation
+			ArrowTransform.localPosition = Vector3.zero;
+			ArrowTransform.localRotation = Quaternion.Euler(-90 + _aimDirection.x * 360, 0, _aimDirection.y * 360 + 90);
+			ArrowTransform.localPosition = Vector3.forward * .25f;
 		}
 
 
@@ -178,19 +190,20 @@ public class GolfBallBehaviour : MonoBehaviour
 			CurrentPlayerState = PlayerStates.Finished;
 		}
 		_lineRenderer.enabled = false;
+		ArrowTransform.gameObject.SetActive(true);
 	}
 
 	private void CheckVelocity(Rigidbody rb)
 	{
 		if (rb.velocity == Vector3.zero)
 		{
-
-
 			_lineRenderer.enabled = true;
+			ArrowTransform.gameObject.SetActive(true);
 		}
 		else
 		{
 			_lineRenderer.enabled = false;
+			ArrowTransform.gameObject.SetActive(false);
 		}
 	}
 
