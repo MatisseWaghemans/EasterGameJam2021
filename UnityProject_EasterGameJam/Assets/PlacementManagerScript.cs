@@ -60,7 +60,7 @@ public class PlacementManagerScript : MonoBehaviour
 
     private void CheckPlacement()
     {
-        Ray ray = new Ray(CurrentObject.transform.position, Vector3.down);
+        Ray ray = new Ray(this.transform.position, Vector3.down);
 
         if(Physics.Raycast(ray, out var hit, 100f))
         {
