@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlacementController : MonoBehaviour
 {
@@ -18,6 +20,9 @@ public class PlacementController : MonoBehaviour
 
 	public static PlacementController Instance;
 
+	[SerializeField] private GameObject _testCube;
+	Gamepad _newGamepad = Gamepad.current;
+
 	protected void Awake()
 	{
 		Instance = this;
@@ -25,10 +30,14 @@ public class PlacementController : MonoBehaviour
 
 	void Update()
 	{
+
+		MoveCursor();
+
+
 		if (currentPlaceableObject != null)
 		{
 			MoveCurrentObjectToPointer();
-			RotateFromMouseWheel();
+			RotateObject();
 		}
 
 		if (_isRaycastValid == false)
@@ -37,7 +46,12 @@ public class PlacementController : MonoBehaviour
 		}
 	}
 
-	public void HandleNewObjectHotkey()
+	private void MoveCursor(/*int playerId*/)
+    {
+      //als x > 0 -> Move cursor to rigt etc..
+    }
+
+    public void HandleNewObjectHotkey()
 	{
 		for (int i = 0; i < placeableObjectPrefab.Length; i++)
 		{
@@ -81,11 +95,12 @@ public class PlacementController : MonoBehaviour
 		}
 	}
 
-	private void RotateFromMouseWheel()
+	private void RotateObject()
 	{
-		//Debug.Log(Input.mouseScrollDelta);
+		
 		mouseWheelRotation += Input.mouseScrollDelta.y;
-		currentPlaceableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
+		currentPlaceableObject.transform.forward = _newGamepad.rightStick.ReadValue();
+		//currentPlaceableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
 	}
 
 	public void ReleaseObject()
