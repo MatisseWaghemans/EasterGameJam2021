@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
 	{
 		_activePlayerControllers = new List<PlayerController>();
 		_gameManager = FindObjectOfType<GameManager>();
-
+		
         _levelState = LevelState.Overview;
 
 		switch (_levelState)
