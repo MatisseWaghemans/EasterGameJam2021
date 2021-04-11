@@ -20,9 +20,12 @@ public class OpeningBall : MonoBehaviour
 
 	private Vector3 _force;
 
+	public GameObject soundPlayer;
+
 	private void Start()
 	{
 		_rigidbody.isKinematic = true;
+		DontDestroyOnLoad(soundPlayer);
 	}
 
 	public void ShootBall()
