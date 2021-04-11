@@ -113,7 +113,7 @@ Material:
     - _ZWrite: 1
     - _emission: 5
     - _speed: 10
-    - _vertecDisplacement: 1
+    - _vertecDisplacement: 0.05
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
