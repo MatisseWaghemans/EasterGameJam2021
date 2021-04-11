@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.InputSystem.InputAction;
 
 public class PlacementManagerScript : MonoBehaviour
 {
@@ -67,41 +68,45 @@ public class PlacementManagerScript : MonoBehaviour
         }
     }
 
-    public void Movement(Vector2 axisValues)
+    public void Movement(CallbackContext value)
     {
-        if(axisValues != Vector2.zero)
+        var axisValues = value.ReadValue<Vector2>();
+        if (axisValues != Vector2.zero)
         {
             ControllerPointer.transform.Translate(new Vector3(axisValues.x, 0, axisValues.y) * TranslateSpeed) ;
         }
     }
-    public void Interact()
+    public void Interact(CallbackContext value)
     {
-        Transform currentTransform;
-
-        Ray ray = new Ray(ControllerPointer.transform.position, Vector3.down);
-
-
-        if (!_isHoldingItem)
+        if (value.started)
         {
-            if (Physics.Raycast(ray, out var hit, 100f))
-            {
-                if(hit.transform.gameObject.layer == 13)
-                {
+            Transform currentTransform;
 
-                    currentTransform = hit.transform;
-                    PickUpObject(currentTransform);
+            Ray ray = new Ray(ControllerPointer.transform.position, Vector3.down);
+
+
+            if (!_isHoldingItem)
+            {
+                if (Physics.Raycast(ray, out var hit, 100f))
+                {
+                    if (hit.transform.gameObject.layer == 13)
+                    {
+
+                        currentTransform = hit.transform;
+                        PickUpObject(currentTransform);
+                    }
                 }
             }
-        }
-        else if(_placeable)
-        {
-            if (Physics.Raycast(ray, out var hit, 100f))
+            else if (_placeable)
             {
-                
-                PlaceObject(hit);
-                _placeable = false;
+                if (Physics.Raycast(ray, out var hit, 100f))
+                {
+
+                    PlaceObject(hit);
+                    _placeable = false;
+                }
+
             }
-            
         }
     }
 
@@ -123,8 +128,9 @@ public class PlacementManagerScript : MonoBehaviour
         //GolfBallBehaviours[controllerID].enabled = false;
 
     }
-    public void Rotate(Vector2 axisValues)
+    public void Rotate(CallbackContext value)
     {
+        var axisValues = value.ReadValue<Vector2>();
         if (_isHoldingItem)
         {
 

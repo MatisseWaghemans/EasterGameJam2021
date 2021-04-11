@@ -522,9 +522,9 @@ MonoBehaviour:
     m_ActionName: Menu Controls/Left Click[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 693313691138871470}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 2882906312180043230}
+        m_TargetAssemblyTypeName: PlacementManagerScript, Assembly-CSharp
+        m_MethodName: Movement
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -589,11 +589,35 @@ MonoBehaviour:
     m_ActionId: 55ff3d47-f054-4230-94d4-ae3121c066a1
     m_ActionName: Player Controls/Spectate[/XInputControllerWindows/buttonNorth,/DualShock4GamepadHID/buttonNorth,/Keyboard/s]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2882906312180043230}
+        m_TargetAssemblyTypeName: PlacementManagerScript, Assembly-CSharp
+        m_MethodName: Rotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6fcf80af-6985-4b88-8cd4-cb85cea1a6d3
     m_ActionName: Placement Controls/Rotation[/DualShock4GamepadHID/rightStick,/XInputControllerWindows/rightStick]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2882906312180043230}
+        m_TargetAssemblyTypeName: PlacementManagerScript, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 3f29ffe2-a4cf-4e52-93b9-e6ded82e8c6c
     m_ActionName: Placement Controls/Interact[/Keyboard/e,/DualShock4GamepadHID/buttonSouth,/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 1
