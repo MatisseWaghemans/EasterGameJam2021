@@ -92,6 +92,8 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	private void UpdateSpectatingControls()
 	{
+		_arrowRenderer.enabled = false;
+
 		#region Spectate Movement
 
 		// ADD MOVEMENT TOP DOWN CAMERA
@@ -102,14 +104,9 @@ public class GolfBallBehaviour : MonoBehaviour
 
 		if (_gamepad.buttonNorth.wasPressedThisFrame)
 		{
-			_spectateStateToggled = !_spectateStateToggled;
-
-			if (_spectateStateToggled)
-			{
 				CurrentPlayerState = PlayerStates.Shooting;
 				_cameraPivot.GetComponent<CameraBehaviour>().RegisterPositions();
 				_cameraBehaviour.SpectatingPos.gameObject.SetActive(false);
-			}
 		}
 
 		#endregion
@@ -180,13 +177,8 @@ public class GolfBallBehaviour : MonoBehaviour
 
 		if (_gamepad.buttonNorth.wasPressedThisFrame)
 		{
-			_spectateStateToggled = !_spectateStateToggled;
-
-			if (_spectateStateToggled)
-			{
 				CurrentPlayerState = PlayerStates.Spectating;
 				_cameraBehaviour.SpectatingPos.gameObject.SetActive(true);
-			}
 		}
 
 		#endregion

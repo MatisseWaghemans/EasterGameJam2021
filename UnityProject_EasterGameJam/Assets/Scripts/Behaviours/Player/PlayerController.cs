@@ -166,6 +166,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 		CalculateMovementInputSmoothing();
+		
 		UpdateControllerPlacementPointer();
 		//UpdatePlayerMovement();
 		//UpdatePlayerAnimationMovement();
