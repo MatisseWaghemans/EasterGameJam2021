@@ -18,6 +18,8 @@ public class GolfBallBehaviour : MonoBehaviour
 
 	private Rigidbody _rb;
 
+	private Vector3 _resetShotPosition = Vector3.zero;
+
 
 	public PlayerStates CurrentPlayerState
 	{
@@ -70,7 +72,6 @@ public class GolfBallBehaviour : MonoBehaviour
 			case PlayerStates.Placing:
 				break;
 			case PlayerStates.Finished:
-				_rb.isKinematic = true;
 				break;
 			default:
 				break;
@@ -125,7 +126,7 @@ public class GolfBallBehaviour : MonoBehaviour
 		{
 			// Debug.DrawLine(this.transform.position, this.transform.position + _aimDirection * _aimSpeedDirection);
 			_lineRenderer.SetPosition(0, this.transform.position);
-			_lineRenderer.SetPosition(1, this.transform.position + _aimDirection * _aimSpeedDirection/2);
+			_lineRenderer.SetPosition(1, this.transform.position + _aimDirection * _aimSpeedDirection / 2);
 			//Debug.Log(_aimDirection);
 		}
 
@@ -141,7 +142,7 @@ public class GolfBallBehaviour : MonoBehaviour
 		}
 		if (_gamepad.buttonSouth.wasReleasedThisFrame)
 		{
-			
+
 		}
 
 		#endregion
@@ -152,7 +153,7 @@ public class GolfBallBehaviour : MonoBehaviour
 		{
 			_spectateStateToggled = !_spectateStateToggled;
 
-			if(_spectateStateToggled)
+			if (_spectateStateToggled)
 			{
 				CurrentPlayerState = PlayerStates.Spectating;
 				_cameraBehaviour.SpectatingPos.gameObject.SetActive(true);
@@ -167,13 +168,15 @@ public class GolfBallBehaviour : MonoBehaviour
 	private void ShootGolfBall(Vector3 shootingForce)
 	{
 
+
+		_resetShotPosition = this.transform.position;
 		Vector3 flatPlaneVector = new Vector3(shootingForce.x, .05f, shootingForce.z);
 		_rb.AddForce(flatPlaneVector * 10f, ForceMode.Impulse);
 		CurrentLevelScore++;
-		if(CurrentLevelScore == 12)
-        {
+		if (CurrentLevelScore == 12)
+		{
 			CurrentPlayerState = PlayerStates.Finished;
-        }
+		}
 		_lineRenderer.enabled = false;
 	}
 
@@ -181,6 +184,8 @@ public class GolfBallBehaviour : MonoBehaviour
 	{
 		if (rb.velocity == Vector3.zero)
 		{
+
+
 			_lineRenderer.enabled = true;
 		}
 		else
@@ -189,21 +194,43 @@ public class GolfBallBehaviour : MonoBehaviour
 		}
 	}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Finish"))
-        {
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("Finish"))
+		{
 			PlayerFinished();
-        }
-    }
-
+		}
+		if (other.gameObject.CompareTag("OutOfBounds"))
+		{
+			this.transform.position = _resetShotPosition;
+			_rb.velocity = Vector3.zero;
+			_rb.constraints = RigidbodyConstraints.FreezeAll;
+			StartCoroutine(ResetForces());
+		}
+	}
+	private bool sldks;
 	private void PlayerFinished()
-    {
+	{
 		//#######################################################
-		//#####Store score in total game score (game manager).###
+		//#####Store score in total game score (game manager).		ALS GE EEN NIEUW LEVEL LAADT -> rigidbody constraints afzetten###
 		//######################################################
 		CurrentLevelScore = 0;
 		CurrentPlayerState = PlayerStates.Finished;
+		
+		_rb.velocity = Vector3.zero;
+
+	}
+	private bool AllFinished(bool test)
+	{
+		bool newbool = test;
+		return newbool;
+	}
+
+	private IEnumerator ResetForces()
+	{
+		_rb.constraints = RigidbodyConstraints.FreezeAll;
+		yield return new WaitForEndOfFrame();
+		_rb.constraints = RigidbodyConstraints.None;
 	}
 }
 
