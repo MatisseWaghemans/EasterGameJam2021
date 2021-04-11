@@ -388,20 +388,12 @@
                     "interactions": ""
                 },
                 {
-                    "name": "PlaceObstacle",
-                    "type": "Button",
-                    "id": "f1959672-2368-4709-8f8c-ae157109c7f5",
-                    "expectedControlType": "",
+                    "name": "Rotation",
+                    "type": "Value",
+                    "id": "6fcf80af-6985-4b88-8cd4-cb85cea1a6d3",
+                    "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "Press"
-                },
-                {
-                    "name": "SelectNextObstacle",
-                    "type": "Button",
-                    "id": "7a3025a2-e43b-4d04-b21c-03884e7f5662",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Press"
+                    "interactions": ""
                 },
                 {
                     "name": "Exit State",
@@ -415,6 +407,14 @@
                     "name": "TogglePause",
                     "type": "Button",
                     "id": "9ba8c3e6-eec4-4147-a8bb-5c056a70f06d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "3f29ffe2-a4cf-4e52-93b9-e6ded82e8c6c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
@@ -511,28 +511,6 @@
                 },
                 {
                     "name": "",
-                    "id": "dc8ade96-a8a9-4ea6-89e0-eb8ee627d2e5",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "PlaceObstacle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d20de0a9-e14a-4a2e-b932-e1ad9f87c9dc",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard And Mouse",
-                    "action": "PlaceObstacle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e538d9cc-24bc-4ebd-8157-61a58a3232c5",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
@@ -555,23 +533,34 @@
                 },
                 {
                     "name": "",
-                    "id": "45aef03b-b01d-4287-aa36-6747b5066c29",
-                    "path": "<Gamepad>/rightTrigger",
+                    "id": "f093092d-dae8-4b9b-9f9e-e8cdb7120866",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "SelectNextObstacle",
+                    "groups": "Keyboard And Mouse",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "4f541a3b-97e6-4ce7-a796-3baa719e4bae",
-                    "path": "<Keyboard>/k",
+                    "id": "239067c8-324a-4ad7-a052-672bbe967af1",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard And Mouse",
-                    "action": "SelectNextObstacle",
+                    "groups": "Gamepad",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ee9dada1-19e6-45e6-ba57-294b56a6f238",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Rotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

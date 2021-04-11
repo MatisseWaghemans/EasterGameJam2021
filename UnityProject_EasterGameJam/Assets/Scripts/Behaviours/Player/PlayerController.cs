@@ -67,11 +67,7 @@ public class PlayerController : MonoBehaviour
 			PlacementController.Instance.HandleNewObjectHotkey();
 	}
 
-	public void OnMovement(InputAction.CallbackContext value)
-    {
-        Vector2 inputMovement = value.ReadValue<Vector2>();
-        rawInputMovement = new Vector3(inputMovement.x, 0, inputMovement.y);
-    }
+
 
     //This is called from PlayerInput, when a button has been pushed, that corresponds with the 'Attack' action
     public void OnAttack(InputAction.CallbackContext value)

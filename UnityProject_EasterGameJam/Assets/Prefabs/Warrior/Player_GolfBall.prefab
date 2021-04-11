@@ -31,6 +31,125 @@ Transform:
   m_Father: {fileID: 1347105900333604123}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &693313691138871470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 126266363140252355}
+  - component: {fileID: 7658549868775748928}
+  - component: {fileID: 7174070583321970087}
+  - component: {fileID: 2814629599035320097}
+  - component: {fileID: 2882906312180043230}
+  m_Layer: 0
+  m_Name: ControllerPointer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &126266363140252355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693313691138871470}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.744379, y: 14.809156, z: -5.816387}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1743518200311987014}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7658549868775748928
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693313691138871470}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7174070583321970087
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693313691138871470}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 6356e7fdfba4594419a42f024df505a9, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &2814629599035320097
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693313691138871470}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2882906312180043230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693313691138871470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 969227af53a5af44fbf340bc730ab39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ControllerPointer: {fileID: 0}
+  GolfBallBehaviours: []
+  _isHoldingItem: 0
+  _placeable: 0
+  PickUpObjectLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  LevelManager: {fileID: 0}
+  CurrentObject: {fileID: 0}
+  TranslateSpeed: 0.2
+  RotationSpeed: 0.3
 --- !u!1 &1407845927535892800
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,6 +320,7 @@ Transform:
   - {fileID: 1347105900333604123}
   - {fileID: 1597930824552566049}
   - {fileID: 624610913085641336}
+  - {fileID: 126266363140252355}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -402,9 +522,9 @@ MonoBehaviour:
     m_ActionName: Menu Controls/Left Click[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1743518200311987065}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnMovement
+      - m_Target: {fileID: 2882906312180043230}
+        m_TargetAssemblyTypeName: PlacementManagerScript, Assembly-CSharp
+        m_MethodName: Movement
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -416,22 +536,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 88cffc8a-527a-462e-bbe3-4b2302935cff
     m_ActionName: Placement Controls/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1743518200311987065}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: PlaceObstacle
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f1959672-2368-4709-8f8c-ae157109c7f5
-    m_ActionName: Placement Controls/Attack[/XInputControllerWindows/buttonSouth,/Keyboard/e]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 4b6f6b9f-010a-4586-aeed-be042e830689
@@ -470,22 +574,6 @@ MonoBehaviour:
     m_ActionName: Spectating Controls/TogglePause[/Keyboard/p,/XInputControllerWindows/start]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1743518200311987065}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnSelectNextObject
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7a3025a2-e43b-4d04-b21c-03884e7f5662
-    m_ActionName: Placement Controls/SelectNextObstacle[/XInputControllerWindows/rightTrigger,/Keyboard/k]
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 8241443260326758885}
         m_TargetAssemblyTypeName: GolfBallBehaviour, Assembly-CSharp
         m_MethodName: OnSpectate
@@ -500,6 +588,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 55ff3d47-f054-4230-94d4-ae3121c066a1
     m_ActionName: Player Controls/Spectate[/XInputControllerWindows/buttonNorth,/DualShock4GamepadHID/buttonNorth,/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2882906312180043230}
+        m_TargetAssemblyTypeName: PlacementManagerScript, Assembly-CSharp
+        m_MethodName: Rotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6fcf80af-6985-4b88-8cd4-cb85cea1a6d3
+    m_ActionName: Placement Controls/Rotation[/DualShock4GamepadHID/rightStick,/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2882906312180043230}
+        m_TargetAssemblyTypeName: PlacementManagerScript, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3f29ffe2-a4cf-4e52-93b9-e6ded82e8c6c
+    m_ActionName: Placement Controls/Interact[/Keyboard/e,/DualShock4GamepadHID/buttonSouth,/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Menu Controls
@@ -1155,18 +1275,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3b1372b9ddae5a4c87df278f409e6ec, type: 3}
---- !u!114 &8241443260326758885 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8108799752580633499, guid: a3b1372b9ddae5a4c87df278f409e6ec,
-    type: 3}
-  m_PrefabInstance: {fileID: 204705508656437886}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5836fee49a44f374abd13079db07f578, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1597930824552566049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1512012163308459871, guid: a3b1372b9ddae5a4c87df278f409e6ec,
@@ -1179,6 +1287,18 @@ MeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 204705508656437886}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8241443260326758885 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8108799752580633499, guid: a3b1372b9ddae5a4c87df278f409e6ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 204705508656437886}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5836fee49a44f374abd13079db07f578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2429433376540511540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1313,18 +1433,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 719e707e89478f24ebb95271e2ba0d66, type: 3}
---- !u!20 &1347105900690529190 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 3676895960661825170, guid: 719e707e89478f24ebb95271e2ba0d66,
-    type: 3}
-  m_PrefabInstance: {fileID: 2429433376540511540}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1347105900333604123 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3676895960440197167, guid: 719e707e89478f24ebb95271e2ba0d66,
-    type: 3}
-  m_PrefabInstance: {fileID: 2429433376540511540}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1347105900333604122 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3676895960440197166, guid: 719e707e89478f24ebb95271e2ba0d66,
@@ -1337,6 +1445,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d31f061d1c226964e9257c5ba855a99f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &1347105900690529190 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3676895960661825170, guid: 719e707e89478f24ebb95271e2ba0d66,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429433376540511540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1347105900333604123 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3676895960440197167, guid: 719e707e89478f24ebb95271e2ba0d66,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429433376540511540}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4459172332049462868
 PrefabInstance:
   m_ObjectHideFlags: 0
