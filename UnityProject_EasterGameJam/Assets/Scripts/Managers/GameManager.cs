@@ -71,9 +71,9 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < Gamepad.all.Count; i++)
         {
-            if (Gamepad.all[i] == null)
+            if (Gamepad.all[i] != null)
             {
-                spawns[i].GetComponentInChildren<TMPro.TMP_Text>().gameObject.SetActive(false);
+                spawns[i].GetComponentInChildren<TMPro.TMP_Text>().gameObject.SetActive(true);
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
