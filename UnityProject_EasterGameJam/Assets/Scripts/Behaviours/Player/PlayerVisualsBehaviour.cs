@@ -20,13 +20,16 @@ public class PlayerVisualsBehaviour : MonoBehaviour
     public SkinnedMeshRenderer playerSkinnedMeshRenderer;
 
     private int clothingTintShaderID;
+    private Material _material;
 
-    public void SetupBehaviour(int newControllerID, PlayerInput newPlayerInput)
+    public void SetupBehaviour(int newControllerID, PlayerInput newPlayerInput, Material material)
     {
         controllerID = newControllerID;
         playerInput = newPlayerInput;
 
-		SetupShaderIDs();
+        _material = material;
+
+        SetupShaderIDs();
 
 		UpdatePlayerVisuals();
 	}

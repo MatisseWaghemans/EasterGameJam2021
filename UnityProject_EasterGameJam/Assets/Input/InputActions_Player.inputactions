@@ -30,9 +30,9 @@
                     "interactions": "Press"
                 },
                 {
-                    "name": "ToggleSpectatingState",
+                    "name": "Spectate",
                     "type": "Button",
-                    "id": "909ce440-9c79-4988-9355-ea31a8d0eee1",
+                    "id": "55ff3d47-f054-4230-94d4-ae3121c066a1",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press"
@@ -181,23 +181,23 @@
                 },
                 {
                     "name": "",
-                    "id": "c245ad15-ff68-48be-8098-aa1e0bb46a4b",
+                    "id": "5955bfc8-ad5d-47d1-ac75-5de597a2261c",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ToggleSpectatingState",
+                    "action": "Spectate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "ed7a476a-6df0-4733-b761-70313c381fdd",
-                    "path": "<Keyboard>/f",
+                    "id": "3fc50e7d-c043-47df-8880-d4485bc54288",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard And Mouse",
-                    "action": "ToggleSpectatingState",
+                    "action": "Spectate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

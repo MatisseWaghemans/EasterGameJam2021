@@ -33,13 +33,12 @@ public class PlayerController : MonoBehaviour
 
     public bool IsDisconnected = false;
 
-    private Material _material;
+    [SerializeField]
+    private Camera _camera;
+	public Camera Camera { get => _camera; }
 
 	[SerializeField]
-	private Rigidbody _controllerPointerRigidbody;
-
-	[SerializeField]
-	private Transform _controllerPointerTransform;
+    private MeshRenderer _meshRenderer;
 
 	[SerializeField]
 	private PlacementController _placementController;
@@ -50,12 +49,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"tried connecting: {playerInput.currentControlScheme}");
         ControllerID = newControllerID;
 
-        this.GetComponentInChildren<MeshRenderer>().material = material;
-        _material = material;
+        _meshRenderer.material = material;
 
         currentControlScheme = playerInput.currentControlScheme;
 
-        playerVisualsBehaviour.SetupBehaviour(ControllerID, playerInput);
+        playerVisualsBehaviour.SetupBehaviour(ControllerID, playerInput, material);
     }
 
 
@@ -165,39 +163,10 @@ public class PlayerController : MonoBehaviour
     //Update Loop - Used for calculating frame-based data
     void Update()
     {
-		CalculateMovementInputSmoothing();
-		
-		UpdateControllerPlacementPointer();
-		//UpdatePlayerMovement();
-		//UpdatePlayerAnimationMovement();
-	}
 
-	private void UpdateControllerPlacementPointer()
-	{
-		_controllerPointerRigidbody.MovePosition(_controllerPointerTransform.position + smoothInputMovement);
 	}
 
 	//Input's Axes values are raw
-
-
-	void CalculateMovementInputSmoothing()
-    {
-        
-        smoothInputMovement = Vector3.Lerp(smoothInputMovement, rawInputMovement, Time.deltaTime * movementSmoothingSpeed);
-
-    }
-
-    void UpdatePlayerMovement()
-    {
-        playerMovementBehaviour.UpdateMovementData(smoothInputMovement);
-    }
-
-    void UpdatePlayerAnimationMovement()
-    {
-        playerAnimationBehaviour.UpdateMovementAnimation(smoothInputMovement.magnitude);
-    }
-
-
     public void SetInputActiveState(bool gameIsPaused)
     {
         switch (gameIsPaused)

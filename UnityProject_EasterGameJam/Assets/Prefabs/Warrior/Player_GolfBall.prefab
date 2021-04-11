@@ -223,8 +223,8 @@ MonoBehaviour:
   playerInput: {fileID: 1743518200311987064}
   movementSmoothingSpeed: 5
   IsDisconnected: 0
-  _meshRenderer: {fileID: 1597930824552566051}
   _camera: {fileID: 1347105900690529190}
+  _meshRenderer: {fileID: 1597930824552566051}
   _placementController: {fileID: 0}
 --- !u!114 &1743518200311987064
 MonoBehaviour:
@@ -469,10 +469,6 @@ MonoBehaviour:
     m_ActionId: df938fa9-5245-4fcc-a90b-2ed245e5a9f3
     m_ActionName: Spectating Controls/TogglePause[/Keyboard/p,/XInputControllerWindows/start]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 909ce440-9c79-4988-9355-ea31a8d0eee1
-    m_ActionName: Player Controls/ToggleSpectatingState[/XInputControllerWindows/buttonNorth,/Keyboard/f]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1743518200311987065}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
@@ -488,6 +484,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7a3025a2-e43b-4d04-b21c-03884e7f5662
     m_ActionName: Placement Controls/SelectNextObstacle[/XInputControllerWindows/rightTrigger,/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8241443260326758885}
+        m_TargetAssemblyTypeName: GolfBallBehaviour, Assembly-CSharp
+        m_MethodName: OnSpectate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 55ff3d47-f054-4230-94d4-ae3121c066a1
+    m_ActionName: Player Controls/Spectate[/XInputControllerWindows/buttonNorth,/DualShock4GamepadHID/buttonNorth,/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Menu Controls
