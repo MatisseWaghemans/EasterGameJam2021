@@ -219,7 +219,7 @@ public class GolfBallBehaviour : MonoBehaviour
 
 		_hitParticle.Play();
 
-		if (CurrentLevelScore == 12)
+		if (CurrentLevelScore == 99)
 		{
 			CurrentPlayerState = PlayerStates.Finished;
 		}
