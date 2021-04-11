@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public enum GameMode
 {
@@ -43,6 +44,8 @@ public class GameManager : MonoBehaviour
 
     private bool _canStart = false;
 
+    private List<GameObject> _texts = new List<GameObject>();
+
     public static GameManager Instance;
     void Awake()
     {
@@ -56,6 +59,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(Instance);
             Instance = this;
+        }
+        foreach(var text in spawns)
+        {
+            _texts.Add(text.GetComponentInChildren<TMP_Text>().gameObject);
+            text.GetComponentInChildren<TMP_Text>().gameObject.SetActive(false);
         }
     }
     void Start()
@@ -73,7 +81,7 @@ public class GameManager : MonoBehaviour
         {
             if (Gamepad.all[i] != null)
             {
-                spawns[i].GetComponentInChildren<TMPro.TMP_Text>().gameObject.SetActive(true);
+                _texts[i].SetActive(true);
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -86,6 +94,7 @@ public class GameManager : MonoBehaviour
                     return;
                 else
                 {
+                    _texts[i].SetActive(false);
                     SpawnPlayer(i);
                     _usedGamepads.Add(Gamepad.all[i]);
                 }
