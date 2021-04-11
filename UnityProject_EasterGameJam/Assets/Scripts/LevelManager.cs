@@ -36,6 +36,9 @@ public class LevelManager : MonoBehaviour
 	[SerializeField]
 	private string _nextSceneName;
 
+	[SerializeField]
+	private ParticleSystem _fireworksParticle;
+
 	private GameManager _gameManager;
 	private List<PlayerController> _activePlayerControllers;
 	public List<PlayerController> PlayerControllers { get => _activePlayerControllers; }
@@ -116,6 +119,14 @@ public class LevelManager : MonoBehaviour
 	{
 		FinishedPlayers.Clear();
 		Debug.Log("All players finished");
+		_fireworksParticle.Play();
+		StartCoroutine(LoadScene());
+		
+	}
+
+	private IEnumerator LoadScene()
+	{
+		yield return new WaitForSeconds(2f);
 		SceneManager.LoadScene(_nextSceneName);
 	}
 
