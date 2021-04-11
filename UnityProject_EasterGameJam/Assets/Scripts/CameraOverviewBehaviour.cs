@@ -25,11 +25,15 @@ public class CameraOverviewBehaviour : MonoBehaviour
 
 	public UnityEvent Event;
 
+    private LevelManager _levelManager;
+
 	private void Awake()
 	{
 		_camera.transform.position = _waypoints[0].transform.position;
 		_camera.transform.rotation = _waypoints[0].transform.rotation;
-	}
+
+        _levelManager = FindObjectOfType<LevelManager>();
+    }
 	public void StartOverview()
 	{
 		_camera.enabled = true;
@@ -92,5 +96,7 @@ public class CameraOverviewBehaviour : MonoBehaviour
 		Event.Invoke();
 
 		_camera.enabled = false;
-	}
+
+        _levelManager.LevelState = ILevelStates.LevelState.Placement;
+    }
 }

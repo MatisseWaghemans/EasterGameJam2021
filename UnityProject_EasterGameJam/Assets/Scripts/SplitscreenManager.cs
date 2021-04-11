@@ -8,9 +8,16 @@ public class SplitscreenManager : MonoBehaviour
 {
     [SerializeField] private Camera _cameraPrefab;
     private Camera[] _cameras;
+    private LevelManager _levelManager;
+
+    void Awake()
+    {
+        _levelManager = FindObjectOfType<LevelManager>();
+    }
 
     public void InitCameras(List<PlayerController> players, Transform[] startTransforms, bool autoEnable = false)
     {
+        _levelManager.LevelState = ILevelStates.LevelState.SplitScreen;
         _cameras = new Camera[players.Count];
 
         for (int i = 0; i < _cameras.Length; i++)
